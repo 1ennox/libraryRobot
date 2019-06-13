@@ -684,5 +684,11 @@ namespace SingleReaderTest
             compareReport detailReportform = new compareReport();
             detailReportform.ShowDialog();
         }
+
+        private void OpenStorageDB_Click(object sender, EventArgs e)
+        {
+            storageForm storage = new storageForm();
+            storage.ShowDialog();
+        }
     }
 }

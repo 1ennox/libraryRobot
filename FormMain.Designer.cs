@@ -53,6 +53,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.btnExecute = new System.Windows.Forms.Button();
+            this.openStorageDB = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
@@ -82,7 +83,7 @@
             // btnScan
             // 
             this.btnScan.Enabled = false;
-            this.btnScan.Location = new System.Drawing.Point(86, 27);
+            this.btnScan.Location = new System.Drawing.Point(151, 27);
             this.btnScan.Name = "btnScan";
             this.btnScan.Size = new System.Drawing.Size(75, 23);
             this.btnScan.TabIndex = 0;
@@ -92,7 +93,7 @@
             // 
             // btnClean
             // 
-            this.btnClean.Location = new System.Drawing.Point(248, 27);
+            this.btnClean.Location = new System.Drawing.Point(313, 27);
             this.btnClean.Name = "btnClean";
             this.btnClean.Size = new System.Drawing.Size(75, 23);
             this.btnClean.TabIndex = 0;
@@ -134,7 +135,7 @@
             // btnStop
             // 
             this.btnStop.Enabled = false;
-            this.btnStop.Location = new System.Drawing.Point(167, 27);
+            this.btnStop.Location = new System.Drawing.Point(232, 27);
             this.btnStop.Name = "btnStop";
             this.btnStop.Size = new System.Drawing.Size(75, 23);
             this.btnStop.TabIndex = 0;
@@ -307,7 +308,7 @@
             // 
             // btnExecute
             // 
-            this.btnExecute.Location = new System.Drawing.Point(410, 27);
+            this.btnExecute.Location = new System.Drawing.Point(394, 27);
             this.btnExecute.Name = "btnExecute";
             this.btnExecute.Size = new System.Drawing.Size(75, 23);
             this.btnExecute.TabIndex = 39;
@@ -315,11 +316,22 @@
             this.btnExecute.UseVisualStyleBackColor = true;
             this.btnExecute.Click += new System.EventHandler(this.BtnExecute_Click);
             // 
+            // openStorageDB
+            // 
+            this.openStorageDB.Location = new System.Drawing.Point(3, 292);
+            this.openStorageDB.Name = "openStorageDB";
+            this.openStorageDB.Size = new System.Drawing.Size(75, 23);
+            this.openStorageDB.TabIndex = 40;
+            this.openStorageDB.Text = "View";
+            this.openStorageDB.UseVisualStyleBackColor = true;
+            this.openStorageDB.Click += new System.EventHandler(this.OpenStorageDB_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1028, 523);
+            this.Controls.Add(this.openStorageDB);
             this.Controls.Add(this.btnExecute);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.storageDBDisConnect);
@@ -383,6 +395,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnExecute;
+        private System.Windows.Forms.Button openStorageDB;
     }
 }
 
