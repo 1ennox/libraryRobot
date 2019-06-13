@@ -1,0 +1,24 @@
+﻿Invengo RFID Log
+2019-01-22 14:52:15,462 [1] FATAL - Reader1:Connecte failure.A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond 192.168.1.230:7086
+2019-03-20 15:17:21,264 [1] ERROR - Reader1:建立连接失败。Reader1:端口“COM2”不存在。
+2019-04-26 16:10:45,107 [1] ERROR - Reader1:发送数据错误。连到系统上的设备没有发挥作用。
+
+2019-04-26 16:10:45,107 [1] ERROR - Reader1:发送数据错误。对端口的访问被拒绝。
+2019-04-26 16:10:45,123 [1] ERROR - Reader1:发送数据错误。对端口的访问被拒绝。
+2019-04-26 16:10:45,123 [1] ERROR - Reader1:发送数据错误。对端口的访问被拒绝。
+2019-04-26 16:11:24,677 [1] ERROR - Reader1:发送数据错误。对端口的访问被拒绝。
+2019-06-10 14:54:34,460 [1] ERROR - Reader1:建立连接失败。Reader1:端口“COM3”不存在。
+2019-06-10 14:56:27,861 [1] ERROR - Reader1:建立连接失败。Reader1:端口“COM3”不存在。
+2019-06-10 14:58:53,927 [1] ERROR - Reader1:建立连接失败。Reader1:端口“COM3”不存在。
+2019-06-10 14:59:08,884 [1] ERROR - Reader1:建立连接失败。Reader1:端口“COM3”不存在。
+2019-06-11 09:41:58,851 [1] ERROR - Reader1:建立连接失败。Reader1:端口“COM3”不存在。
+2019-06-11 09:42:10,477 [1] ERROR - Reader1:建立连接失败。Reader1:端口“COM3”不存在。
+2019-06-11 15:36:30,803 [1] ERROR - Reader1:建立连接失败。Reader1:端口“COM4”不存在。
+2019-06-11 16:29:32,128 [7] WARN - Reader1:RS232数据接收错误。Overrun
+2019-06-12 09:35:38,852 [7] WARN - Reader1:RS232数据接收错误。Overrun
+2019-06-12 10:11:32,519 [1] ERROR - Reader1:建立连接失败。Reader1:端口“COM9”不存在。
+2019-06-12 10:37:24,645 [6] WARN - Reader1:RS232数据接收错误。Overrun
+2019-06-12 15:47:42,697 [9] WARN - Reader1:RS232数据接收错误。Overrun
+2019-06-12 15:55:17,327 [9] WARN - Reader1:RS232数据接收错误。Overrun
+2019-06-13 10:59:00,650 [1] ERROR - Reader1:建立连接失败。Reader1:端口“COM9”不存在。
+2019-06-13 10:59:29,340 [7] WARN - Reader1:RS232数据接收错误。Overrun

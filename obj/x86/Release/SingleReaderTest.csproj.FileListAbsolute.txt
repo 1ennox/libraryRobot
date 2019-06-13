@@ -1,0 +1,131 @@
+D:\项目文件\TFS2012 Project\基于UHF RFID读写器通用API软件包和读写器通用演示软件\Source\SingleReaderTest\bin\Release\SingleReaderTest.exe
+D:\项目文件\TFS2012 Project\基于UHF RFID读写器通用API软件包和读写器通用演示软件\Source\SingleReaderTest\bin\Release\SingleReaderTest.pdb
+D:\项目文件\TFS2012 Project\基于UHF RFID读写器通用API软件包和读写器通用演示软件\Source\SingleReaderTest\obj\x86\Release\SingleReaderTest.Properties.Resources.resources
+D:\项目文件\TFS2012 Project\基于UHF RFID读写器通用API软件包和读写器通用演示软件\Source\SingleReaderTest\obj\x86\Release\SingleReaderTest.csproj.GenerateResource.Cache
+D:\项目文件\TFS2012 Project\基于UHF RFID读写器通用API软件包和读写器通用演示软件\Source\SingleReaderTest\obj\x86\Release\SingleReaderTest.exe
+D:\项目文件\TFS2012 Project\基于UHF RFID读写器通用API软件包和读写器通用演示软件\Source\SingleReaderTest\obj\x86\Release\SingleReaderTest.pdb
+D:\项目文件\TFS2012 Project\基于UHF RFID读写器通用API软件包和读写器通用演示软件\Source\SingleReaderTest\obj\x86\Release\SingleReaderTest.FormMain.resources
+D:\项目文件\TFS2012 Project\基于UHF RFID读写器通用API软件包和读写器通用演示软件\Source\SingleReaderTest\bin\Release\Communication.dll
+D:\项目文件\TFS2012 Project\基于UHF RFID读写器通用API软件包和读写器通用演示软件\Source\SingleReaderTest\bin\Release\IRP1.dll
+D:\项目文件\TFS2012 Project\基于UHF RFID读写器通用API软件包和读写器通用演示软件\Source\SingleReaderTest\bin\Release\RFIDInterface.dll
+D:\项目文件\TFS2012 Project\基于UHF RFID读写器通用API软件包和读写器通用演示软件\Source\SingleReaderTest\bin\Release\Communication.pdb
+D:\项目文件\TFS2012 Project\基于UHF RFID读写器通用API软件包和读写器通用演示软件\Source\SingleReaderTest\bin\Release\IRP1.pdb
+D:\项目文件\TFS2012 Project\基于UHF RFID读写器通用API软件包和读写器通用演示软件\Source\SingleReaderTest\bin\Release\RFIDInterface.pdb
+D:\项目文件\TFS2012 Project\基于UHF RFID读写器通用API软件包和读写器通用演示软件\Source\SingleReaderTest\obj\x86\Release\SingleReaderTest.FormScanConfig.resources
+D:\项目文件\TFS2012 Project\基于UHF RFID读写器通用API软件包和读写器通用演示软件\Source\SingleReaderTest\obj\x86\Release\SingleReaderTest.FormReaderConfig.resources
+D:\项目文件\TFS2012 Project\基于UHF RFID读写器通用API软件包和读写器通用演示软件\Source\SingleReaderTest\obj\x86\Release\SingleReaderTest.FormGPIO.resources
+D:\项目文件\TFS2012 Project\基于UHF RFID读写器通用API软件包和读写器通用演示软件\Source\SingleReaderTest\obj\x86\Release\SingleReaderTest.csprojResolveAssemblyReference.cache
+D:\项目文件\TFS2012 Project\基于UHF RFID读写器通用API软件包和读写器通用演示软件\Source\SingleReaderTest\obj\x86\Release\SingleReaderTest.FormHelp.resources
+E:\固定式DEMO\DEMO 1.33\中文\RFID Demo V1.3.4\开发包\_NET\示例代码\SingleReaderTest\bin\Release\SingleReaderTest.exe
+E:\固定式DEMO\DEMO 1.33\中文\RFID Demo V1.3.4\开发包\_NET\示例代码\SingleReaderTest\bin\Release\SingleReaderTest.pdb
+E:\固定式DEMO\DEMO 1.33\中文\RFID Demo V1.3.4\开发包\_NET\示例代码\SingleReaderTest\bin\Release\Communication.dll
+E:\固定式DEMO\DEMO 1.33\中文\RFID Demo V1.3.4\开发包\_NET\示例代码\SingleReaderTest\bin\Release\IRP1.dll
+E:\固定式DEMO\DEMO 1.33\中文\RFID Demo V1.3.4\开发包\_NET\示例代码\SingleReaderTest\bin\Release\RFIDInterface.dll
+E:\固定式DEMO\DEMO 1.33\中文\RFID Demo V1.3.4\开发包\_NET\示例代码\SingleReaderTest\bin\Release\Communication.pdb
+E:\固定式DEMO\DEMO 1.33\中文\RFID Demo V1.3.4\开发包\_NET\示例代码\SingleReaderTest\bin\Release\IRP1.pdb
+E:\固定式DEMO\DEMO 1.33\中文\RFID Demo V1.3.4\开发包\_NET\示例代码\SingleReaderTest\bin\Release\RFIDInterface.pdb
+E:\固定式DEMO\DEMO 1.33\中文\RFID Demo V1.3.4\开发包\_NET\示例代码\SingleReaderTest\obj\x86\Release\SingleReaderTest.csprojResolveAssemblyReference.cache
+E:\固定式DEMO\DEMO 1.33\中文\RFID Demo V1.3.4\开发包\_NET\示例代码\SingleReaderTest\obj\x86\Release\SingleReaderTest.FormGPIO.resources
+E:\固定式DEMO\DEMO 1.33\中文\RFID Demo V1.3.4\开发包\_NET\示例代码\SingleReaderTest\obj\x86\Release\SingleReaderTest.FormHelp.resources
+E:\固定式DEMO\DEMO 1.33\中文\RFID Demo V1.3.4\开发包\_NET\示例代码\SingleReaderTest\obj\x86\Release\SingleReaderTest.FormMain.resources
+E:\固定式DEMO\DEMO 1.33\中文\RFID Demo V1.3.4\开发包\_NET\示例代码\SingleReaderTest\obj\x86\Release\SingleReaderTest.FormReaderConfig.resources
+E:\固定式DEMO\DEMO 1.33\中文\RFID Demo V1.3.4\开发包\_NET\示例代码\SingleReaderTest\obj\x86\Release\SingleReaderTest.FormScanConfig.resources
+E:\固定式DEMO\DEMO 1.33\中文\RFID Demo V1.3.4\开发包\_NET\示例代码\SingleReaderTest\obj\x86\Release\SingleReaderTest.Properties.Resources.resources
+E:\固定式DEMO\DEMO 1.33\中文\RFID Demo V1.3.4\开发包\_NET\示例代码\SingleReaderTest\obj\x86\Release\SingleReaderTest.csproj.GenerateResource.Cache
+E:\固定式DEMO\DEMO 1.33\中文\RFID Demo V1.3.4\开发包\_NET\示例代码\SingleReaderTest\obj\x86\Release\SingleReaderTest.exe
+E:\固定式DEMO\DEMO 1.33\中文\RFID Demo V1.3.4\开发包\_NET\示例代码\SingleReaderTest\obj\x86\Release\SingleReaderTest.pdb
+C:\Users\UIC\Documents\GitHub\SingleReaderTest\obj\x86\Release\SingleReaderTest.FormGPIO.resources
+C:\Users\UIC\Documents\GitHub\SingleReaderTest\obj\x86\Release\SingleReaderTest.FormHelp.resources
+C:\Users\UIC\Documents\GitHub\SingleReaderTest\obj\x86\Release\SingleReaderTest.FormMain.resources
+C:\Users\UIC\Documents\GitHub\SingleReaderTest\obj\x86\Release\SingleReaderTest.FormReaderConfig.resources
+C:\Users\UIC\Documents\GitHub\SingleReaderTest\obj\x86\Release\SingleReaderTest.FormScanConfig.resources
+C:\Users\UIC\Documents\GitHub\SingleReaderTest\obj\x86\Release\SingleReaderTest.Properties.Resources.resources
+C:\Users\UIC\Documents\GitHub\SingleReaderTest\obj\x86\Release\SingleReaderTest.csproj.GenerateResource.cache
+C:\Users\UIC\Documents\GitHub\SingleReaderTest\obj\x86\Release\SingleReaderTest.csproj.CoreCompileInputs.cache
+C:\Users\UIC\Documents\GitHub\SingleReaderTest\obj\x86\Release\SingleReaderTest.exe
+C:\Users\UIC\Documents\GitHub\SingleReaderTest\obj\x86\Release\SingleReaderTest.pdb
+C:\Users\UIC\Documents\GitHub\SingleReaderTest\bin\Release\SingleReaderTest.exe
+C:\Users\UIC\Documents\GitHub\SingleReaderTest\bin\Release\SingleReaderTest.pdb
+C:\Users\UIC\Documents\GitHub\SingleReaderTest\bin\Release\Communication.dll
+C:\Users\UIC\Documents\GitHub\SingleReaderTest\bin\Release\Invengo.Language.dll
+C:\Users\UIC\Documents\GitHub\SingleReaderTest\bin\Release\IRP1.dll
+C:\Users\UIC\Documents\GitHub\SingleReaderTest\bin\Release\RFIDInterface.dll
+C:\Users\UIC\Documents\GitHub\SingleReaderTest\obj\x86\Release\SingleReaderTest.csproj.CopyComplete
+C:\Users\UIC\Downloads\SingleReaderTest\bin\Release\SingleReaderTest.exe
+C:\Users\UIC\Downloads\SingleReaderTest\bin\Release\SingleReaderTest.pdb
+C:\Users\UIC\Downloads\SingleReaderTest\bin\Release\Communication.dll
+C:\Users\UIC\Downloads\SingleReaderTest\bin\Release\Invengo.Language.dll
+C:\Users\UIC\Downloads\SingleReaderTest\bin\Release\IRP1.dll
+C:\Users\UIC\Downloads\SingleReaderTest\bin\Release\RFIDInterface.dll
+C:\Users\UIC\Downloads\SingleReaderTest\obj\x86\Release\SingleReaderTest.FormGPIO.resources
+C:\Users\UIC\Downloads\SingleReaderTest\obj\x86\Release\SingleReaderTest.FormHelp.resources
+C:\Users\UIC\Downloads\SingleReaderTest\obj\x86\Release\SingleReaderTest.FormMain.resources
+C:\Users\UIC\Downloads\SingleReaderTest\obj\x86\Release\SingleReaderTest.FormReaderConfig.resources
+C:\Users\UIC\Downloads\SingleReaderTest\obj\x86\Release\SingleReaderTest.FormScanConfig.resources
+C:\Users\UIC\Downloads\SingleReaderTest\obj\x86\Release\SingleReaderTest.Properties.Resources.resources
+C:\Users\UIC\Downloads\SingleReaderTest\obj\x86\Release\SingleReaderTest.csproj.GenerateResource.cache
+C:\Users\UIC\Downloads\SingleReaderTest\obj\x86\Release\SingleReaderTest.csproj.CoreCompileInputs.cache
+C:\Users\UIC\Downloads\SingleReaderTest\obj\x86\Release\SingleReaderTest.csproj.CopyComplete
+C:\Users\UIC\Downloads\SingleReaderTest\obj\x86\Release\SingleReaderTest.exe
+C:\Users\UIC\Downloads\SingleReaderTest\obj\x86\Release\SingleReaderTest.pdb
+C:\Users\UIC\Downloads\SingleReaderTest\obj\x86\Release\SingleReaderTest.csprojAssemblyReference.cache
+C:\Users\lennox\Desktop\SingleReaderTest\bin\Release\SingleReaderTest.exe
+C:\Users\lennox\Desktop\SingleReaderTest\bin\Release\SingleReaderTest.pdb
+C:\Users\lennox\Desktop\SingleReaderTest\bin\Release\Communication.dll
+C:\Users\lennox\Desktop\SingleReaderTest\bin\Release\Invengo.Language.dll
+C:\Users\lennox\Desktop\SingleReaderTest\bin\Release\IRP1.dll
+C:\Users\lennox\Desktop\SingleReaderTest\bin\Release\RFIDInterface.dll
+C:\Users\lennox\Desktop\SingleReaderTest\obj\x86\Release\SingleReaderTest.csprojAssemblyReference.cache
+C:\Users\lennox\Desktop\SingleReaderTest\obj\x86\Release\SingleReaderTest.FormGPIO.resources
+C:\Users\lennox\Desktop\SingleReaderTest\obj\x86\Release\SingleReaderTest.FormHelp.resources
+C:\Users\lennox\Desktop\SingleReaderTest\obj\x86\Release\SingleReaderTest.FormMain.resources
+C:\Users\lennox\Desktop\SingleReaderTest\obj\x86\Release\SingleReaderTest.FormReaderConfig.resources
+C:\Users\lennox\Desktop\SingleReaderTest\obj\x86\Release\SingleReaderTest.FormScanConfig.resources
+C:\Users\lennox\Desktop\SingleReaderTest\obj\x86\Release\SingleReaderTest.Properties.Resources.resources
+C:\Users\lennox\Desktop\SingleReaderTest\obj\x86\Release\SingleReaderTest.csproj.GenerateResource.cache
+C:\Users\lennox\Desktop\SingleReaderTest\obj\x86\Release\SingleReaderTest.csproj.CoreCompileInputs.cache
+C:\Users\lennox\Desktop\SingleReaderTest\obj\x86\Release\SingleReaderTest.csproj.CopyComplete
+C:\Users\lennox\Desktop\SingleReaderTest\obj\x86\Release\SingleReaderTest.exe
+C:\Users\lennox\Desktop\SingleReaderTest\obj\x86\Release\SingleReaderTest.pdb
+C:\Users\lennox\Desktop\SingleReaderTest\bin\Release\SingleReaderTest.exe.config
+C:\Users\lennox\Desktop\SingleReaderTest\bin\Release\MySql.Data.dll
+C:\Users\UIC\Desktop\SingleReaderTest_database\obj\x86\Release\SingleReaderTest.csprojAssemblyReference.cache
+C:\Users\UIC\Desktop\SingleReaderTest_database\obj\x86\Release\SingleReaderTest.FormGPIO.resources
+C:\Users\UIC\Desktop\SingleReaderTest_database\obj\x86\Release\SingleReaderTest.FormHelp.resources
+C:\Users\UIC\Desktop\SingleReaderTest_database\obj\x86\Release\SingleReaderTest.FormMain.resources
+C:\Users\UIC\Desktop\SingleReaderTest_database\obj\x86\Release\SingleReaderTest.FormReaderConfig.resources
+C:\Users\UIC\Desktop\SingleReaderTest_database\obj\x86\Release\SingleReaderTest.FormScanConfig.resources
+C:\Users\UIC\Desktop\SingleReaderTest_database\obj\x86\Release\SingleReaderTest.Properties.Resources.resources
+C:\Users\UIC\Desktop\SingleReaderTest_database\obj\x86\Release\SingleReaderTest.csproj.GenerateResource.cache
+C:\Users\UIC\Desktop\SingleReaderTest_database\obj\x86\Release\SingleReaderTest.csproj.CoreCompileInputs.cache
+C:\Users\UIC\Desktop\SingleReaderTest_database\obj\x86\Release\SingleReaderTest.exe
+C:\Users\UIC\Desktop\SingleReaderTest_database\obj\x86\Release\SingleReaderTest.pdb
+C:\Users\UIC\Desktop\SingleReaderTest_database\bin\Release\SingleReaderTest.exe.config
+C:\Users\UIC\Desktop\SingleReaderTest_database\bin\Release\SingleReaderTest.exe
+C:\Users\UIC\Desktop\SingleReaderTest_database\bin\Release\SingleReaderTest.pdb
+C:\Users\UIC\Desktop\SingleReaderTest_database\bin\Release\Communication.dll
+C:\Users\UIC\Desktop\SingleReaderTest_database\bin\Release\Invengo.Language.dll
+C:\Users\UIC\Desktop\SingleReaderTest_database\bin\Release\IRP1.dll
+C:\Users\UIC\Desktop\SingleReaderTest_database\bin\Release\RFIDInterface.dll
+C:\Users\UIC\Desktop\SingleReaderTest_database\obj\x86\Release\SingleReaderTest.csproj.CopyComplete
+C:\Users\lennox\Desktop\SingleReaderTest_database\bin\Release\SingleReaderTest.exe.config
+C:\Users\lennox\Desktop\SingleReaderTest_database\bin\Release\SingleReaderTest.exe
+C:\Users\lennox\Desktop\SingleReaderTest_database\bin\Release\SingleReaderTest.pdb
+C:\Users\lennox\Desktop\SingleReaderTest_database\bin\Release\Communication.dll
+C:\Users\lennox\Desktop\SingleReaderTest_database\bin\Release\Invengo.Language.dll
+C:\Users\lennox\Desktop\SingleReaderTest_database\bin\Release\IRP1.dll
+C:\Users\lennox\Desktop\SingleReaderTest_database\bin\Release\MySql.Data.dll
+C:\Users\lennox\Desktop\SingleReaderTest_database\bin\Release\RFIDInterface.dll
+C:\Users\lennox\Desktop\SingleReaderTest_database\obj\x86\Release\SingleReaderTest.csprojAssemblyReference.cache
+C:\Users\lennox\Desktop\SingleReaderTest_database\obj\x86\Release\SingleReaderTest.FormGPIO.resources
+C:\Users\lennox\Desktop\SingleReaderTest_database\obj\x86\Release\SingleReaderTest.FormHelp.resources
+C:\Users\lennox\Desktop\SingleReaderTest_database\obj\x86\Release\SingleReaderTest.FormMain.resources
+C:\Users\lennox\Desktop\SingleReaderTest_database\obj\x86\Release\SingleReaderTest.FormReaderConfig.resources
+C:\Users\lennox\Desktop\SingleReaderTest_database\obj\x86\Release\SingleReaderTest.FormScanConfig.resources
+C:\Users\lennox\Desktop\SingleReaderTest_database\obj\x86\Release\SingleReaderTest.Properties.Resources.resources
+C:\Users\lennox\Desktop\SingleReaderTest_database\obj\x86\Release\SingleReaderTest.csproj.GenerateResource.cache
+C:\Users\lennox\Desktop\SingleReaderTest_database\obj\x86\Release\SingleReaderTest.csproj.CoreCompileInputs.cache
+C:\Users\lennox\Desktop\SingleReaderTest_database\obj\x86\Release\SingleReaderTest.csproj.CopyComplete
+C:\Users\lennox\Desktop\SingleReaderTest_database\obj\x86\Release\SingleReaderTest.exe
+C:\Users\lennox\Desktop\SingleReaderTest_database\obj\x86\Release\SingleReaderTest.pdb
+C:\Users\lennox\Desktop\SingleReaderTest_database\obj\x86\Release\SingleReaderTest.detailDB.resources
