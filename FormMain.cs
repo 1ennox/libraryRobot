@@ -16,7 +16,13 @@ namespace SingleReaderTest
     {
         // 实例化读写器类
         SerialPort port;
+        
+        //laptop only
         IRP1.Reader reader = new IRP1.Reader("Reader1", "RS232", "COM9,115200");//串口
+
+        //desktop
+        //IRP1.Reader reader = new IRP1.Reader("Reader1", "RS232", "COM3,115200");//串口
+
         //IRP1.Reader reader = new IRP1.Reader("Reader1", "TCPIP_Client", "192.168.1.230:7086");//网口
         IRP1.ReadTag scanMsg = new IRP1.ReadTag(IRP1.ReadTag.ReadMemoryBank.EPC_6C);//扫描消息
         DataTable myDt = new DataTable();//显示扫描数据
@@ -344,6 +350,24 @@ namespace SingleReaderTest
             return false;
         }
 
+        private bool whetherResultInDB(string epc)
+        {
+            MySqlDataAdapter mysda = new MySqlDataAdapter("SELECT book_ID FROM compareResult", mycon);
+            DataTable dt = new DataTable();
+            mysda.Fill(dt);
+            string result = " ";
+            foreach (DataRow book in dt.Rows)
+            {
+                result = book["book_ID"].ToString();
+                if (result.Equals(epc))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+
         private void compare()
         {
             MySqlDataAdapter myTest = new MySqlDataAdapter("SELECT book_ID FROM testlibraryreader", mycon);
@@ -376,13 +400,28 @@ namespace SingleReaderTest
                 }
                 if (isLost == true)
                 {
-                    resultLoss += bookTotal["book_ID"].ToString() + "\n";
+                 resultLoss = bookTotal["book_ID"].ToString();
+                    if(whetherResultInDB(resultLoss) == false)
+                    {
+                        try
+                        {
+                            mycon.Open();
+                            string storeReport = "insert into compareresult (book_ID) VALUES ('" + resultLoss + "')";
+                            MySqlCommand store = new MySqlCommand(storeReport, mycon);
+                            store.ExecuteNonQuery();
+                            store.Dispose();
+                            mycon.Close();
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Report generate error.");
+                        }
+                        
+                    }
                 }
                 isLost = true;
 
             }
-
-            MessageBox.Show(resultLoss);
         }
 
         // 改变界面按钮状态
@@ -642,6 +681,8 @@ namespace SingleReaderTest
         private void BtnExecute_Click(object sender, EventArgs e)
         {
             compare();
+            compareReport detailReportform = new compareReport();
+            detailReportform.ShowDialog();
         }
     }
 }

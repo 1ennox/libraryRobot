@@ -129,3 +129,6 @@ C:\Users\lennox\Desktop\SingleReaderTest_database\obj\x86\Release\SingleReaderTe
 C:\Users\lennox\Desktop\SingleReaderTest_database\obj\x86\Release\SingleReaderTest.exe
 C:\Users\lennox\Desktop\SingleReaderTest_database\obj\x86\Release\SingleReaderTest.pdb
 C:\Users\lennox\Desktop\SingleReaderTest_database\obj\x86\Release\SingleReaderTest.detailDB.resources
+C:\Users\UIC\Desktop\SingleReaderTest_database\obj\x86\Release\SingleReaderTest.detailDB.resources
+C:\Users\UIC\Desktop\SingleReaderTest_database\obj\x86\Release\SingleReaderTest.compareReport.resources
+C:\Users\lennox\Desktop\SingleReaderTest_database\obj\x86\Release\SingleReaderTest.compareReport.resources

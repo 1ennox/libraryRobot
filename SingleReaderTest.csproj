@@ -67,6 +67,12 @@
     <Compile Include="detailDB.Designer.cs">
       <DependentUpon>detailDB.cs</DependentUpon>
     </Compile>
+    <Compile Include="compareReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="compareReport.Designer.cs">
+      <DependentUpon>compareReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormGPIO.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -101,6 +107,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="detailDB.resx">
       <DependentUpon>detailDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="compareReport.resx">
+      <DependentUpon>compareReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormGPIO.resx">
       <DependentUpon>FormGPIO.cs</DependentUpon>
