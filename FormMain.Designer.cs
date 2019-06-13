@@ -312,7 +312,7 @@
             this.btnExecute.Name = "btnExecute";
             this.btnExecute.Size = new System.Drawing.Size(75, 23);
             this.btnExecute.TabIndex = 39;
-            this.btnExecute.Text = "Execute";
+            this.btnExecute.Text = "Report";
             this.btnExecute.UseVisualStyleBackColor = true;
             this.btnExecute.Click += new System.EventHandler(this.BtnExecute_Click);
             // 

@@ -605,11 +605,6 @@ namespace SingleReaderTest
             tableName = " testlibraryreader ";
             dbisConnect = true;
             changeCtrlEnable("dbconn");
-
-
-            //SqlCommand cmd = new SqlCommand();
-            //cmd.Connection = con;
-            //string sql = "";
         }
 
         private void btnDBDisconn_Click(object sender, EventArgs e)
@@ -620,11 +615,6 @@ namespace SingleReaderTest
             tableName = " ";
             dbisConnect = false;
             changeCtrlEnable("dbdisconn");
-
-
-            //SqlCommand cmd = new SqlCommand();
-            //cmd.Connection = con;
-            //string sql = "";
         }
         private void StorageDBConnect_Click(object sender, EventArgs e)
         {
