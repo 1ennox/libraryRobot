@@ -16,7 +16,7 @@ namespace SingleReaderTest
     {
         // 实例化读写器类
         SerialPort port;
-        
+
         //laptop only
         IRP1.Reader reader = new IRP1.Reader("Reader1", "RS232", "COM9,115200");//串口
 
@@ -266,18 +266,25 @@ namespace SingleReaderTest
                         isAdd = false;
                         count = int.Parse(dr["Count"].ToString()) + 1;
                         dr["Count"] = count;
-                    }
-                    if(whetherInDB(epc) == true && dbisConnect == true)
-                    {
-                        updateToDB(epc, count);
-                    }
-                    else if(whetherInDB(epc) == false && dbisConnect == true)
-                    {
-                        insertToDB(epc, count);
-                    }
-                    else
-                    {
-
+                        //if (whetherInDB(epc) == true && dbisConnect == true)
+                        //{
+                        //    updateToDB(epc, count);
+                        //}
+                        //else if (whetherInDB(epc) == false && dbisConnect == true)
+                        //{
+                        //    insertToDB(epc, count);
+                        //}
+                        if(dbisConnect == true)
+                        {
+                            if(whetherInDB(epc) == true)
+                            {
+                                updateToDB(epc, count);
+                            }
+                            else
+                            {
+                                insertToDB(epc, count);
+                            }
+                        }
                     }
                 }
 
