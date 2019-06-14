@@ -43,7 +43,7 @@ namespace SingleReaderTest
             if (port == null)
             {
                 //COM4为Arduino使用的串口号，需根据实际情况调整
-                //port = new SerialPort("COM3", 9600);
+                //port = new SerialPort("COM4", 9600);
                 //port.Open();
             }
 
@@ -266,14 +266,6 @@ namespace SingleReaderTest
                         isAdd = false;
                         count = int.Parse(dr["Count"].ToString()) + 1;
                         dr["Count"] = count;
-                        //if (whetherInDB(epc) == true && dbisConnect == true)
-                        //{
-                        //    updateToDB(epc, count);
-                        //}
-                        //else if (whetherInDB(epc) == false && dbisConnect == true)
-                        //{
-                        //    insertToDB(epc, count);
-                        //}
                         if(dbisConnect == true)
                         {
                             if(whetherInDB(epc) == true)

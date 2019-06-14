@@ -38,6 +38,7 @@
             // 
             this.storageDBView.AllowUserToAddRows = false;
             this.storageDBView.AllowUserToDeleteRows = false;
+            this.storageDBView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.storageDBView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.storageDBView.Location = new System.Drawing.Point(58, 40);
             this.storageDBView.Name = "storageDBView";
