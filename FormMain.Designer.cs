@@ -52,7 +52,7 @@
             this.storageDBConnect = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.btnExecute = new System.Windows.Forms.Button();
+            this.c = new System.Windows.Forms.Button();
             this.openStorageDB = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -344,17 +344,17 @@
             this.label5.TabIndex = 38;
             this.label5.Text = "From read to database";
             // 
-            // btnExecute
+            // c
             // 
-            this.btnExecute.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExecute.Location = new System.Drawing.Point(460, 34);
-            this.btnExecute.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnExecute.Name = "btnExecute";
-            this.btnExecute.Size = new System.Drawing.Size(87, 29);
-            this.btnExecute.TabIndex = 39;
-            this.btnExecute.Text = "Report";
-            this.btnExecute.UseVisualStyleBackColor = true;
-            this.btnExecute.Click += new System.EventHandler(this.BtnExecute_Click);
+            this.c.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.c.Location = new System.Drawing.Point(460, 34);
+            this.c.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.c.Name = "c";
+            this.c.Size = new System.Drawing.Size(87, 29);
+            this.c.TabIndex = 39;
+            this.c.Text = "Report";
+            this.c.UseVisualStyleBackColor = true;
+            this.c.Click += new System.EventHandler(this.BtnExecute_Click);
             // 
             // openStorageDB
             // 
@@ -374,7 +374,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1199, 654);
             this.Controls.Add(this.openStorageDB);
-            this.Controls.Add(this.btnExecute);
+            this.Controls.Add(this.c);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.storageDBDisConnect);
             this.Controls.Add(this.storageDBConnect);
@@ -438,7 +438,7 @@
         private System.Windows.Forms.Button storageDBConnect;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Button btnExecute;
+        private System.Windows.Forms.Button c;
         private System.Windows.Forms.Button openStorageDB;
     }
 }

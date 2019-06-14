@@ -351,7 +351,7 @@ namespace SingleReaderTest
 
         private bool whetherResultInDB(string epc)
         {
-            MySqlDataAdapter mysda = new MySqlDataAdapter("SELECT EPC FROM compareResult", mycon);
+            MySqlDataAdapter mysda = new MySqlDataAdapter("SELECT * FROM compareResult", mycon);
             DataTable dt = new DataTable();
             mysda.Fill(dt);
             string result = " ";
@@ -464,24 +464,28 @@ namespace SingleReaderTest
                     btnDBDisconn.Enabled = true;
                     storageDBConnect.Enabled = false;
                     storageDBDisConnect.Enabled = false;
+                    c.Enabled = false;
                     break;
                 case "dbdisconn":
                     btnDBConn.Enabled = true;
                     btnDBDisconn.Enabled = false;
                     storageDBConnect.Enabled = true;
                     storageDBDisConnect.Enabled = false;
+                    c.Enabled = true;
                     break;
                 case "storagedbconn":
                     btnDBConn.Enabled = false;
                     btnDBDisconn.Enabled = false;
                     storageDBConnect.Enabled = false;
                     storageDBDisConnect.Enabled = true;
+                    c.Enabled = false;
                     break;
                 case "storagedbdisconn":
                     btnDBConn.Enabled = true;
                     btnDBDisconn.Enabled = false;
                     storageDBConnect.Enabled = true;
                     storageDBDisConnect.Enabled = false;
+                    c.Enabled = true;
                     break;
                 case "scan":
                     btnConn.Enabled = false;

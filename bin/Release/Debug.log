@@ -29,3 +29,4 @@
 2019-06-13 15:58:09,025 [9] WARN - Reader1:RS232数据接收错误。Overrun
 2019-06-13 16:11:30,306 [7] WARN - Reader1:RS232数据接收错误。Overrun
 2019-06-13 16:11:30,336 [8] WARN - Reader1:RS232数据接收错误。Overrun
+2019-06-14 11:11:25,049 [1] ERROR - Reader1:建立连接失败。Reader1:端口“COM9”不存在。
