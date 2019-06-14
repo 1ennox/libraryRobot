@@ -308,7 +308,7 @@ namespace SingleReaderTest
             }
             else
             {
-                MySqlCommand mycom = new MySqlCommand("INSERT INTO " + tableName + " (book_ID, count) VALUES('" + epc + "','" + count + "')", mycon);
+                MySqlCommand mycom = new MySqlCommand("INSERT INTO " + tableName + " (EPC, count) VALUES('" + epc + "','" + count + "')", mycon);
                 try
                 {
                     mycom.ExecuteNonQuery();
@@ -321,7 +321,7 @@ namespace SingleReaderTest
         }
         private void updateToDB(String epc, int count)
         {
-            MySqlCommand mycom = new MySqlCommand("UPDATE " + tableName + " SET count = '" + count + "' WHERE book_ID = '" + epc + "'", mycon);
+            MySqlCommand mycom = new MySqlCommand("UPDATE " + tableName + " SET count = '" + count + "' WHERE EPC = '" + epc + "'", mycon);
                     try
                     {
                         mycom.ExecuteNonQuery();
@@ -334,13 +334,13 @@ namespace SingleReaderTest
 
         private bool whetherInDB(string epc)
         {
-            MySqlDataAdapter mysda = new MySqlDataAdapter("SELECT book_ID FROM " + tableName, mycon);
+            MySqlDataAdapter mysda = new MySqlDataAdapter("SELECT EPC FROM " + tableName, mycon);
             DataTable dt = new DataTable();
             mysda.Fill(dt);
             string result = " ";
             foreach (DataRow book in dt.Rows)
             {
-                result = book["book_ID"].ToString();
+                result = book["EPC"].ToString();
                 if (result.Equals(epc))
                 {
                     return true;
@@ -351,13 +351,13 @@ namespace SingleReaderTest
 
         private bool whetherResultInDB(string epc)
         {
-            MySqlDataAdapter mysda = new MySqlDataAdapter("SELECT book_ID FROM compareResult", mycon);
+            MySqlDataAdapter mysda = new MySqlDataAdapter("SELECT EPC FROM compareResult", mycon);
             DataTable dt = new DataTable();
             mysda.Fill(dt);
             string result = " ";
             foreach (DataRow book in dt.Rows)
             {
-                result = book["book_ID"].ToString();
+                result = book["EPC"].ToString();
                 if (result.Equals(epc))
                 {
                     return true;
@@ -369,8 +369,8 @@ namespace SingleReaderTest
 
         private void compare()
         {
-            MySqlDataAdapter myTest = new MySqlDataAdapter("SELECT book_ID FROM testlibraryreader", mycon);
-            MySqlDataAdapter myTotal = new MySqlDataAdapter("SELECT book_ID FROM totalstorage", mycon);
+            MySqlDataAdapter myTest = new MySqlDataAdapter("SELECT EPC FROM testlibraryreader", mycon);
+            MySqlDataAdapter myTotal = new MySqlDataAdapter("SELECT EPC FROM totalstorage", mycon);
 
             DataTable dtTest = new DataTable();
             DataTable dtTotal = new DataTable();
@@ -386,10 +386,10 @@ namespace SingleReaderTest
             //string resultReport = " ";
             foreach (DataRow bookTotal in dtTotal.Rows)
             {
-                resultTotal = bookTotal["book_ID"].ToString();
+                resultTotal = bookTotal["EPC"].ToString();
                 foreach (DataRow bookTest in dtTest.Rows)
                 {
-                    resultTest = bookTest["book_ID"].ToString();
+                    resultTest = bookTest["EPC"].ToString();
                     if (resultTotal.Equals(resultTest))
                     {
                         isLost = false;
@@ -399,13 +399,13 @@ namespace SingleReaderTest
                 }
                 if (isLost == true)
                 {
-                 resultLoss = bookTotal["book_ID"].ToString();
+                 resultLoss = bookTotal["EPC"].ToString();
                     if(whetherResultInDB(resultLoss) == false)
                     {
                         try
                         {
                             mycon.Open();
-                            string storeReport = "insert into compareresult (book_ID) VALUES ('" + resultLoss + "')";
+                            string storeReport = "insert into compareresult (EPC) VALUES ('" + resultLoss + "')";
                             MySqlCommand store = new MySqlCommand(storeReport, mycon);
                             store.ExecuteNonQuery();
                             store.Dispose();

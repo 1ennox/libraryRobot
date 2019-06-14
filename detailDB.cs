@@ -31,7 +31,7 @@ namespace SingleReaderTest
 
         public void insertData(String id, int count)
         {
-            MySqlCommand mycom = new MySqlCommand("INSERT INTO testlibraryreader (book_ID, count) VALUES('" + id + "','" + count + "')", myconn);
+            MySqlCommand mycom = new MySqlCommand("INSERT INTO testlibraryreader (EPC, count) VALUES('" + id + "','" + count + "')", myconn);
             try
             {
                 myconn.Open();

@@ -21,10 +21,10 @@ namespace SingleReaderTest
 
         public void newFetchData()
         {
-            MySqlDataAdapter mysda = new MySqlDataAdapter("SELECT book_ID FROM compareResult", myconn);
+            MySqlDataAdapter mysda = new MySqlDataAdapter("SELECT EPC FROM compareResult", myconn);
             DataSet ds = new DataSet();
-            mysda.Fill(ds, "book_ID");
-            dataGridView1.DataSource = ds.Tables["book_ID"];
+            mysda.Fill(ds, "EPC");
+            dataGridView1.DataSource = ds.Tables["EPC"];
             mysda.Dispose();
             myconn.Close();
         }
