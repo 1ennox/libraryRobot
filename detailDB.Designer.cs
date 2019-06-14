@@ -55,38 +55,40 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.Location = new System.Drawing.Point(243, 19);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(511, 14);
+            this.label1.Size = new System.Drawing.Size(361, 15);
             this.label1.TabIndex = 1;
             this.label1.Text = "The following table contains all the books readed by the reader";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.Location = new System.Drawing.Point(13, 110);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(208, 12);
+            this.label2.Size = new System.Drawing.Size(184, 15);
             this.label2.TabIndex = 2;
             this.label2.Text = "You can manually upload books";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.Location = new System.Drawing.Point(15, 136);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(47, 12);
+            this.label3.Size = new System.Drawing.Size(54, 15);
             this.label3.TabIndex = 3;
             this.label3.Text = "Book_ID";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label4.Location = new System.Drawing.Point(15, 194);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 12);
+            this.label4.Size = new System.Drawing.Size(37, 15);
             this.label4.TabIndex = 4;
             this.label4.Text = "count";
             this.label4.Click += new System.EventHandler(this.Label4_Click);
@@ -107,6 +109,7 @@
             // 
             // DBbutton1
             // 
+            this.DBbutton1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.DBbutton1.Location = new System.Drawing.Point(13, 288);
             this.DBbutton1.Name = "DBbutton1";
             this.DBbutton1.Size = new System.Drawing.Size(75, 23);
@@ -117,6 +120,7 @@
             // 
             // btnClearTable
             // 
+            this.btnClearTable.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnClearTable.Location = new System.Drawing.Point(418, 396);
             this.btnClearTable.Name = "btnClearTable";
             this.btnClearTable.Size = new System.Drawing.Size(144, 23);

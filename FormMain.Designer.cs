@@ -61,9 +61,11 @@
             // 
             // btnConn
             // 
-            this.btnConn.Location = new System.Drawing.Point(3, 55);
+            this.btnConn.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConn.Location = new System.Drawing.Point(3, 69);
+            this.btnConn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnConn.Name = "btnConn";
-            this.btnConn.Size = new System.Drawing.Size(75, 23);
+            this.btnConn.Size = new System.Drawing.Size(87, 29);
             this.btnConn.TabIndex = 0;
             this.btnConn.Text = "Connect";
             this.btnConn.UseVisualStyleBackColor = true;
@@ -72,9 +74,11 @@
             // btnDisconn
             // 
             this.btnDisconn.Enabled = false;
-            this.btnDisconn.Location = new System.Drawing.Point(3, 85);
+            this.btnDisconn.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDisconn.Location = new System.Drawing.Point(3, 106);
+            this.btnDisconn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnDisconn.Name = "btnDisconn";
-            this.btnDisconn.Size = new System.Drawing.Size(75, 23);
+            this.btnDisconn.Size = new System.Drawing.Size(87, 29);
             this.btnDisconn.TabIndex = 0;
             this.btnDisconn.Text = "Disconnect";
             this.btnDisconn.UseVisualStyleBackColor = true;
@@ -83,9 +87,11 @@
             // btnScan
             // 
             this.btnScan.Enabled = false;
-            this.btnScan.Location = new System.Drawing.Point(151, 27);
+            this.btnScan.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnScan.Location = new System.Drawing.Point(176, 34);
+            this.btnScan.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnScan.Name = "btnScan";
-            this.btnScan.Size = new System.Drawing.Size(75, 23);
+            this.btnScan.Size = new System.Drawing.Size(87, 29);
             this.btnScan.TabIndex = 0;
             this.btnScan.Text = "Start Scan";
             this.btnScan.UseVisualStyleBackColor = true;
@@ -93,9 +99,11 @@
             // 
             // btnClean
             // 
-            this.btnClean.Location = new System.Drawing.Point(313, 27);
+            this.btnClean.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClean.Location = new System.Drawing.Point(365, 34);
+            this.btnClean.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnClean.Name = "btnClean";
-            this.btnClean.Size = new System.Drawing.Size(75, 23);
+            this.btnClean.Size = new System.Drawing.Size(87, 29);
             this.btnClean.TabIndex = 0;
             this.btnClean.Text = "Clear";
             this.btnClean.UseVisualStyleBackColor = true;
@@ -110,21 +118,23 @@
             | System.Windows.Forms.AnchorStyles.Left)));
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(153, 56);
+            this.dataGridView1.Location = new System.Drawing.Point(178, 70);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.ReadOnly = true;
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(665, 442);
+            this.dataGridView1.Size = new System.Drawing.Size(776, 552);
             this.dataGridView1.TabIndex = 21;
             // 
             // statusStrip1
             // 
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lblMsg});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 501);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 632);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1028, 22);
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(1199, 22);
             this.statusStrip1.TabIndex = 22;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -136,9 +146,11 @@
             // btnStop
             // 
             this.btnStop.Enabled = false;
-            this.btnStop.Location = new System.Drawing.Point(232, 27);
+            this.btnStop.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStop.Location = new System.Drawing.Point(271, 34);
+            this.btnStop.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(75, 23);
+            this.btnStop.Size = new System.Drawing.Size(87, 29);
             this.btnStop.TabIndex = 0;
             this.btnStop.Text = "Stop Scan";
             this.btnStop.UseVisualStyleBackColor = true;
@@ -147,9 +159,11 @@
             // btnExit
             // 
             this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnExit.Location = new System.Drawing.Point(2, 459);
+            this.btnExit.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExit.Location = new System.Drawing.Point(2, 574);
+            this.btnExit.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(75, 23);
+            this.btnExit.Size = new System.Drawing.Size(87, 29);
             this.btnExit.TabIndex = 0;
             this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
@@ -163,37 +177,41 @@
             this.dataGridView2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Location = new System.Drawing.Point(836, 56);
+            this.dataGridView2.Location = new System.Drawing.Point(975, 70);
+            this.dataGridView2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.ReadOnly = true;
             this.dataGridView2.RowTemplate.Height = 23;
             this.dataGridView2.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView2.Size = new System.Drawing.Size(408, 442);
+            this.dataGridView2.Size = new System.Drawing.Size(476, 552);
             this.dataGridView2.TabIndex = 24;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(0, 41);
+            this.label1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(0, 51);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(41, 12);
+            this.label1.Size = new System.Drawing.Size(48, 15);
             this.label1.TabIndex = 25;
             this.label1.Text = "Reader";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(0, 114);
+            this.label2.Location = new System.Drawing.Point(0, 142);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(0, 12);
+            this.label2.Size = new System.Drawing.Size(0, 15);
             this.label2.TabIndex = 26;
             // 
             // btnDBDisconn
             // 
             this.btnDBDisconn.Enabled = false;
-            this.btnDBDisconn.Location = new System.Drawing.Point(3, 158);
+            this.btnDBDisconn.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDBDisconn.Location = new System.Drawing.Point(3, 198);
+            this.btnDBDisconn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnDBDisconn.Name = "btnDBDisconn";
-            this.btnDBDisconn.Size = new System.Drawing.Size(75, 23);
+            this.btnDBDisconn.Size = new System.Drawing.Size(87, 29);
             this.btnDBDisconn.TabIndex = 27;
             this.btnDBDisconn.Text = "Disconnect";
             this.btnDBDisconn.UseVisualStyleBackColor = true;
@@ -201,9 +219,11 @@
             // 
             // btnDBConn
             // 
-            this.btnDBConn.Location = new System.Drawing.Point(3, 129);
+            this.btnDBConn.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDBConn.Location = new System.Drawing.Point(3, 161);
+            this.btnDBConn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnDBConn.Name = "btnDBConn";
-            this.btnDBConn.Size = new System.Drawing.Size(75, 23);
+            this.btnDBConn.Size = new System.Drawing.Size(87, 29);
             this.btnDBConn.TabIndex = 28;
             this.btnDBConn.Text = "Connect";
             this.btnDBConn.UseVisualStyleBackColor = true;
@@ -212,17 +232,20 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(0, 333);
+            this.label3.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(0, 416);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(23, 12);
+            this.label3.Size = new System.Drawing.Size(29, 15);
             this.label3.TabIndex = 29;
             this.label3.Text = "Arm";
             // 
             // btnArmUp
             // 
-            this.btnArmUp.Location = new System.Drawing.Point(3, 348);
+            this.btnArmUp.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnArmUp.Location = new System.Drawing.Point(3, 435);
+            this.btnArmUp.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnArmUp.Name = "btnArmUp";
-            this.btnArmUp.Size = new System.Drawing.Size(75, 21);
+            this.btnArmUp.Size = new System.Drawing.Size(87, 26);
             this.btnArmUp.TabIndex = 30;
             this.btnArmUp.Text = "Up";
             this.btnArmUp.UseVisualStyleBackColor = true;
@@ -230,9 +253,11 @@
             // 
             // btnArmDown
             // 
-            this.btnArmDown.Location = new System.Drawing.Point(3, 375);
+            this.btnArmDown.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnArmDown.Location = new System.Drawing.Point(3, 469);
+            this.btnArmDown.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnArmDown.Name = "btnArmDown";
-            this.btnArmDown.Size = new System.Drawing.Size(75, 21);
+            this.btnArmDown.Size = new System.Drawing.Size(87, 26);
             this.btnArmDown.TabIndex = 31;
             this.btnArmDown.Text = "Down";
             this.btnArmDown.UseVisualStyleBackColor = true;
@@ -240,9 +265,11 @@
             // 
             // btnArmStop
             // 
-            this.btnArmStop.Location = new System.Drawing.Point(3, 402);
+            this.btnArmStop.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnArmStop.Location = new System.Drawing.Point(3, 502);
+            this.btnArmStop.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnArmStop.Name = "btnArmStop";
-            this.btnArmStop.Size = new System.Drawing.Size(75, 21);
+            this.btnArmStop.Size = new System.Drawing.Size(87, 26);
             this.btnArmStop.TabIndex = 32;
             this.btnArmStop.Text = "Recyle";
             this.btnArmStop.UseVisualStyleBackColor = true;
@@ -250,9 +277,11 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(3, 429);
+            this.button1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(3, 536);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(87, 29);
             this.button1.TabIndex = 33;
             this.button1.Text = "Stop";
             this.button1.UseVisualStyleBackColor = true;
@@ -260,9 +289,11 @@
             // 
             // openDB
             // 
-            this.openDB.Location = new System.Drawing.Point(2, 187);
+            this.openDB.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.openDB.Location = new System.Drawing.Point(2, 234);
+            this.openDB.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.openDB.Name = "openDB";
-            this.openDB.Size = new System.Drawing.Size(75, 23);
+            this.openDB.Size = new System.Drawing.Size(87, 29);
             this.openDB.TabIndex = 34;
             this.openDB.Text = "View";
             this.openDB.UseVisualStyleBackColor = true;
@@ -271,9 +302,11 @@
             // storageDBDisConnect
             // 
             this.storageDBDisConnect.Enabled = false;
-            this.storageDBDisConnect.Location = new System.Drawing.Point(3, 263);
+            this.storageDBDisConnect.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.storageDBDisConnect.Location = new System.Drawing.Point(3, 329);
+            this.storageDBDisConnect.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.storageDBDisConnect.Name = "storageDBDisConnect";
-            this.storageDBDisConnect.Size = new System.Drawing.Size(75, 23);
+            this.storageDBDisConnect.Size = new System.Drawing.Size(87, 29);
             this.storageDBDisConnect.TabIndex = 36;
             this.storageDBDisConnect.Text = "Disconnect";
             this.storageDBDisConnect.UseVisualStyleBackColor = true;
@@ -281,9 +314,11 @@
             // 
             // storageDBConnect
             // 
-            this.storageDBConnect.Location = new System.Drawing.Point(3, 234);
+            this.storageDBConnect.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.storageDBConnect.Location = new System.Drawing.Point(3, 292);
+            this.storageDBConnect.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.storageDBConnect.Name = "storageDBConnect";
-            this.storageDBConnect.Size = new System.Drawing.Size(75, 23);
+            this.storageDBConnect.Size = new System.Drawing.Size(87, 29);
             this.storageDBConnect.TabIndex = 37;
             this.storageDBConnect.Text = "Connect";
             this.storageDBConnect.UseVisualStyleBackColor = true;
@@ -292,26 +327,30 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(0, 219);
+            this.label4.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(0, 274);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(101, 12);
+            this.label4.Size = new System.Drawing.Size(106, 15);
             this.label4.TabIndex = 35;
             this.label4.Text = "Database storage";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(1, 114);
+            this.label5.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(1, 142);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(131, 12);
+            this.label5.Size = new System.Drawing.Size(132, 15);
             this.label5.TabIndex = 38;
             this.label5.Text = "From read to database";
             // 
             // btnExecute
             // 
-            this.btnExecute.Location = new System.Drawing.Point(394, 27);
+            this.btnExecute.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExecute.Location = new System.Drawing.Point(460, 34);
+            this.btnExecute.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnExecute.Name = "btnExecute";
-            this.btnExecute.Size = new System.Drawing.Size(75, 23);
+            this.btnExecute.Size = new System.Drawing.Size(87, 29);
             this.btnExecute.TabIndex = 39;
             this.btnExecute.Text = "Report";
             this.btnExecute.UseVisualStyleBackColor = true;
@@ -319,9 +358,11 @@
             // 
             // openStorageDB
             // 
-            this.openStorageDB.Location = new System.Drawing.Point(3, 292);
+            this.openStorageDB.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.openStorageDB.Location = new System.Drawing.Point(3, 365);
+            this.openStorageDB.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.openStorageDB.Name = "openStorageDB";
-            this.openStorageDB.Size = new System.Drawing.Size(75, 23);
+            this.openStorageDB.Size = new System.Drawing.Size(87, 29);
             this.openStorageDB.TabIndex = 40;
             this.openStorageDB.Text = "View";
             this.openStorageDB.UseVisualStyleBackColor = true;
@@ -329,9 +370,9 @@
             // 
             // FormMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1028, 523);
+            this.ClientSize = new System.Drawing.Size(1199, 654);
             this.Controls.Add(this.openStorageDB);
             this.Controls.Add(this.btnExecute);
             this.Controls.Add(this.label5);
@@ -357,6 +398,8 @@
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnDisconn);
             this.Controls.Add(this.btnConn);
+            this.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FormMain";
             this.Text = "Robot Demo";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.FormMain_FormClosing);

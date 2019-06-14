@@ -49,16 +49,17 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label1.Location = new System.Drawing.Point(252, 9);
+            this.label1.Font = new System.Drawing.Font("Arial", 10.5F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(263, 9);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(247, 14);
+            this.label1.Size = new System.Drawing.Size(221, 16);
             this.label1.TabIndex = 1;
             this.label1.Text = "Here are all the storage books";
             // 
             // btnClearStorageDB
             // 
-            this.btnClearStorageDB.Location = new System.Drawing.Point(355, 403);
+            this.btnClearStorageDB.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnClearStorageDB.Location = new System.Drawing.Point(338, 397);
             this.btnClearStorageDB.Name = "btnClearStorageDB";
             this.btnClearStorageDB.Size = new System.Drawing.Size(75, 23);
             this.btnClearStorageDB.TabIndex = 2;
