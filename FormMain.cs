@@ -17,11 +17,11 @@ namespace SingleReaderTest
         // 实例化读写器类
         SerialPort port;
 
-        //laptop only
-        IRP1.Reader reader = new IRP1.Reader("Reader1", "RS232", "COM9,115200");//串口
+        //laptop only (if the traversing method is ok, then delete this one)
+        //IRP1.Reader reader = new IRP1.Reader("Reader1", "RS232", "COM9,115200");//串口
 
         //desktop
-        //IRP1.Reader reader = new IRP1.Reader("Reader1", "RS232", "COM3,115200");//串口
+        IRP1.Reader reader;//串口
 
         //IRP1.Reader reader = new IRP1.Reader("Reader1", "TCPIP_Client", "192.168.1.230:7086");//网口
         IRP1.ReadTag scanMsg = new IRP1.ReadTag(IRP1.ReadTag.ReadMemoryBank.EPC_6C);//扫描消息
@@ -37,6 +37,9 @@ namespace SingleReaderTest
         public FormMain()
         {
             InitializeComponent();
+            //traversing all possible serial ports, use the first one
+            string[] serialPort = SerialPort.GetPortNames();
+            reader = new IRP1.Reader("Reader1", "RS232", serialPort[0] + ",115200");
 
             this.FormClosed += new FormClosedEventHandler(FormMain_FormClosed);
 
@@ -60,6 +63,7 @@ namespace SingleReaderTest
 
             IRP1.Reader.OnApiException += new Core.ApiExceptionHandle(Reader_OnApiException);
         }
+
         void FormMain_FormClosed(object sender, FormClosedEventArgs e)
         {
             if (port != null && port.IsOpen)
@@ -70,13 +74,13 @@ namespace SingleReaderTest
 
 
         void Reader_OnApiException(Core.ErrInfo e)
-        {            
+        {
             if (e.Ei.ErrCode == "FF22")
             {
                 changeCtrlEnable("disconn");
                 showMsg(e.Ei.ErrMsg);
                 if (isTryReconnNet)
-                    ReConn();                
+                    ReConn();
             }
             else if (e.Ei.ErrCode == "FF24")//发现连接作废,不作断网恢复尝试
             {
@@ -134,10 +138,10 @@ namespace SingleReaderTest
                     else
                     {
                         Thread.Sleep(2000);
-                        continue;                        
+                        continue;
                     }
                 }
-                if(!isSuc)
+                if (!isSuc)
                     showMsg("尝试自动恢复连接失败！");
             }
         }
@@ -156,7 +160,7 @@ namespace SingleReaderTest
             {
                 changeCtrlEnable("conn");
                 //注册接收读写器消息事件
-                reader.OnMessageNotificationReceived += new Invengo.NetAPI.Core.MessageNotificationReceivedHandle(reader_OnMessageNotificationReceived);                
+                reader.OnMessageNotificationReceived += new Invengo.NetAPI.Core.MessageNotificationReceivedHandle(reader_OnMessageNotificationReceived);
                 lblMsg.Text = "Connection Successful!";
             }
             else
@@ -188,7 +192,7 @@ namespace SingleReaderTest
                     {
                         IRP1.RXD_TagData m = (IRP1.RXD_TagData)msg;
                         string tagType = m.ReceivedMessage.TagType;
-                        display(m);                        
+                        display(m);
                     }
                     break;
                 #endregion               
@@ -208,7 +212,7 @@ namespace SingleReaderTest
                         }
                     }
                     break;
-                #endregion               
+                    #endregion
             }
         }
 
@@ -249,7 +253,7 @@ namespace SingleReaderTest
                 displayMethod(msg);
             }
         }
-        
+
         private void displayMethod(IRP1.RXD_TagData msg)
         {
             lock (lockobj)
@@ -260,15 +264,15 @@ namespace SingleReaderTest
                 string tid = Core.Util.ConvertByteArrayToHexString(msg.ReceivedMessage.TID);
                 foreach (DataRow dr in myDt.Rows)
                 {
-                    if((dr["EPC"] != null && dr["EPC"].ToString() != "" && dr["EPC"].ToString() == epc)
+                    if ((dr["EPC"] != null && dr["EPC"].ToString() != "" && dr["EPC"].ToString() == epc)
                         || (dr["TID"] != null && dr["TID"].ToString() != "" && dr["TID"].ToString() == tid))
                     {
                         isAdd = false;
                         count = int.Parse(dr["Count"].ToString()) + 1;
                         dr["Count"] = count;
-                        if(dbisConnect == true)
+                        if (dbisConnect == true)
                         {
-                            if(whetherInDB(epc) == true)
+                            if (whetherInDB(epc) == true)
                             {
                                 updateToDB(epc, count);
                             }
@@ -302,7 +306,7 @@ namespace SingleReaderTest
 
         private void insertToDB(String epc, int count)
         {
-            if(whetherInDB(epc) == true)//if this book has already been put into database, then update its count value
+            if (whetherInDB(epc) == true)//if this book has already been put into database, then update its count value
             {
                 updateToDB(epc, count);
             }
@@ -322,14 +326,14 @@ namespace SingleReaderTest
         private void updateToDB(String epc, int count)
         {
             MySqlCommand mycom = new MySqlCommand("UPDATE " + tableName + " SET count = '" + count + "' WHERE EPC = '" + epc + "'", mycon);
-                    try
-                    {
-                        mycom.ExecuteNonQuery();
-                    }
-                    catch
-                    {
-                        MessageBox.Show("Update error!");
-                    }
+            try
+            {
+                mycom.ExecuteNonQuery();
+            }
+            catch
+            {
+                MessageBox.Show("Update error!");
+            }
         }
 
         private bool whetherInDB(string epc)
@@ -399,8 +403,8 @@ namespace SingleReaderTest
                 }
                 if (isLost == true)
                 {
-                 resultLoss = bookTotal["EPC"].ToString();
-                    if(whetherResultInDB(resultLoss) == false)
+                    resultLoss = bookTotal["EPC"].ToString();
+                    if (whetherResultInDB(resultLoss) == false)
                     {
                         try
                         {
@@ -415,7 +419,7 @@ namespace SingleReaderTest
                         {
                             MessageBox.Show("Report generate error.");
                         }
-                        
+
                     }
                 }
                 isLost = true;
@@ -558,7 +562,7 @@ namespace SingleReaderTest
         // 扫描配置
         private void MI_ScanConfig_Click(object sender, EventArgs e)
         {
-            if(frmScanConfig == null)
+            if (frmScanConfig == null)
                 frmScanConfig = new FormScanConfig(reader);
             if (frmScanConfig.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 scanMsg = frmScanConfig.msg;
@@ -578,7 +582,7 @@ namespace SingleReaderTest
         // GPIO
         private void MI_GPIO_Click(object sender, EventArgs e)
         {
-            FormGPIO frm = new FormGPIO(reader,scanMsg);
+            FormGPIO frm = new FormGPIO(reader, scanMsg);
             frm.ShowDialog();
             frm.Dispose();
         }
@@ -636,9 +640,9 @@ namespace SingleReaderTest
         }
         private void btnArmStop_Click(object sender, EventArgs e)//r
         {
-           
-                PortWrite("F");
-            
+
+            PortWrite("F");
+
         }
 
         private void btnArmUp_Click(object sender, EventArgs e)//u

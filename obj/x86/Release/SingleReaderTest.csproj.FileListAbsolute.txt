@@ -155,3 +155,25 @@ C:\Users\lennox\Desktop\libraryRobot\obj\x86\Release\SingleReaderTest.csproj.Cor
 C:\Users\lennox\Desktop\libraryRobot\obj\x86\Release\SingleReaderTest.csproj.CopyComplete
 C:\Users\lennox\Desktop\libraryRobot\obj\x86\Release\SingleReaderTest.exe
 C:\Users\lennox\Desktop\libraryRobot\obj\x86\Release\SingleReaderTest.pdb
+E:\Github files\libraryRobot\bin\Release\SingleReaderTest.exe.config
+E:\Github files\libraryRobot\bin\Release\SingleReaderTest.exe
+E:\Github files\libraryRobot\bin\Release\SingleReaderTest.pdb
+E:\Github files\libraryRobot\bin\Release\Communication.dll
+E:\Github files\libraryRobot\bin\Release\Invengo.Language.dll
+E:\Github files\libraryRobot\bin\Release\IRP1.dll
+E:\Github files\libraryRobot\bin\Release\RFIDInterface.dll
+E:\Github files\libraryRobot\obj\x86\Release\SingleReaderTest.csprojAssemblyReference.cache
+E:\Github files\libraryRobot\obj\x86\Release\SingleReaderTest.detailDB.resources
+E:\Github files\libraryRobot\obj\x86\Release\SingleReaderTest.compareReport.resources
+E:\Github files\libraryRobot\obj\x86\Release\SingleReaderTest.FormGPIO.resources
+E:\Github files\libraryRobot\obj\x86\Release\SingleReaderTest.FormHelp.resources
+E:\Github files\libraryRobot\obj\x86\Release\SingleReaderTest.FormMain.resources
+E:\Github files\libraryRobot\obj\x86\Release\SingleReaderTest.FormReaderConfig.resources
+E:\Github files\libraryRobot\obj\x86\Release\SingleReaderTest.FormScanConfig.resources
+E:\Github files\libraryRobot\obj\x86\Release\SingleReaderTest.Properties.Resources.resources
+E:\Github files\libraryRobot\obj\x86\Release\SingleReaderTest.storageForm.resources
+E:\Github files\libraryRobot\obj\x86\Release\SingleReaderTest.csproj.GenerateResource.cache
+E:\Github files\libraryRobot\obj\x86\Release\SingleReaderTest.csproj.CoreCompileInputs.cache
+E:\Github files\libraryRobot\obj\x86\Release\SingleReaderTest.csproj.CopyComplete
+E:\Github files\libraryRobot\obj\x86\Release\SingleReaderTest.exe
+E:\Github files\libraryRobot\obj\x86\Release\SingleReaderTest.pdb
