@@ -270,7 +270,7 @@ namespace SingleReaderTest
                         isAdd = false;
                         count = int.Parse(dr["Count"].ToString()) + 1;
                         dr["Count"] = count;
-                        if (dbisConnect == true)
+                        if (dbisConnect == true)//2 stands for layer code and should be stored into a different database 
                         {
                             if (whetherInDB(epc) == true)
                             {
@@ -280,6 +280,10 @@ namespace SingleReaderTest
                             {
                                 insertToDB(epc, count);
                             }
+                        }
+                        else if (epc[9] == '2')//transform hexadecimal code into decimal and store it
+                        {
+                            transformAndStore(epc);
                         }
                     }
                 }
@@ -370,6 +374,48 @@ namespace SingleReaderTest
             return false;
         }
 
+        private void transformAndStore(string epc)
+        {
+            string temp;
+            string layerCode = "";
+            int lCode;
+            temp = epc.Substring(2, 4);
+            int libCode = Convert.ToInt32(temp, 16);
+            layerCode = libCode.ToString();
+            temp = epc.Substring(10, 2);
+            int level = Convert.ToInt32(temp, 16);
+            level = level / 8;
+            layerCode += level.ToString();
+            temp = epc.Substring(12, 1);
+            int room = Convert.ToInt32(temp, 16);
+            room = room / 2;
+            layerCode += room.ToString();
+            temp = epc.Substring(13, 3);
+            int shelf = Convert.ToInt32(temp, 16);
+            shelf = shelf / 8;
+            layerCode += shelf.ToString();
+            temp = epc.Substring(16, 2);
+            int column = Convert.ToInt32(temp, 16);
+            column = column / 2;
+            layerCode += column.ToString();
+            temp = epc.Substring(18, 1);
+            int tier = Convert.ToInt32(temp, 16);
+            tier = tier / 2;
+            layerCode += tier.ToString();
+            lCode = Int32.Parse(layerCode);
+            try
+            {
+                mycon.Open();
+                MySqlCommand store = new MySqlCommand("INSERT INTO `layer` (LibraryCode, Level, RoomNumber, Shelf, ColumnNumber, Tier, LayerCode) VALUES ('"
+                    + libCode + "','" + level +"','" + room + "','" + shelf + "','" + column + "','" + tier +"','" + lCode + "')", mycon);
+                store.ExecuteNonQuery();
+                mycon.Close();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
 
         private void compare()
         {
