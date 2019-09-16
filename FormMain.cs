@@ -281,10 +281,6 @@ namespace SingleReaderTest
                                 insertToDB(epc, count);
                             }
                         }
-                        else if (epc[9] == '2')//transform hexadecimal code into decimal and store it
-                        {
-                            transformAndStore(epc);
-                        }
                     }
                 }
 
@@ -302,6 +298,10 @@ namespace SingleReaderTest
                         String temp = mydr["count"].ToString();
                         int.TryParse(temp, out count);
                         insertToDB(epc, 1);
+                    }
+                    else if (epc[9] == '2')//transform hexadecimal code into decimal and store it
+                    {
+                        transformAndStore(epc);
                     }
                 }
             }
@@ -403,6 +403,7 @@ namespace SingleReaderTest
             tier = tier / 2;
             layerCode += tier.ToString();
             lCode = Int32.Parse(layerCode);
+
             try
             {
                 mycon.Open();
