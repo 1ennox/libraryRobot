@@ -270,7 +270,7 @@ namespace SingleReaderTest
                         isAdd = false;
                         count = int.Parse(dr["Count"].ToString()) + 1;
                         dr["Count"] = count;
-                        if (dbisConnect == true)//2 stands for layer code and should be stored into a different database 
+                        if (dbisConnect == true && epc[9] != '2') 
                         {
                             if (whetherInDB(epc) == true)
                             {
@@ -293,15 +293,15 @@ namespace SingleReaderTest
                     mydr["Count"] = 1;
                     myDt.Rows.Add(mydr);
                     //add data to database
-                    if (dbisConnect == true)
+                    if (epc[9] == '2')//2 stands for layer code and should be stored into a different database
+                    {
+                        transformAndStore(epc);
+                    }
+                    else if (dbisConnect == true  && epc[9] != '2')
                     {
                         String temp = mydr["count"].ToString();
                         int.TryParse(temp, out count);
                         insertToDB(epc, 1);
-                    }
-                    else if (epc[9] == '2')//transform hexadecimal code into decimal and store it
-                    {
-                        transformAndStore(epc);
                     }
                 }
             }
@@ -379,6 +379,11 @@ namespace SingleReaderTest
             string temp;
             string layerCode = "";
             int lCode;
+            MySqlDataAdapter mysda = new MySqlDataAdapter("SELECT LayerCode FROM `layer` ", mycon);
+            DataTable dt = new DataTable();
+            string result = " ";
+            bool flag = false;
+
             temp = epc.Substring(2, 4);
             int libCode = Convert.ToInt32(temp, 16);
             layerCode = libCode.ToString();
@@ -404,17 +409,34 @@ namespace SingleReaderTest
             layerCode += tier.ToString();
             lCode = Int32.Parse(layerCode);
 
-            try
+            mysda.Fill(dt);
+            foreach (DataRow layer in dt.Rows)//if the layer code has already been stored into database, skip the process
             {
-                mycon.Open();
-                MySqlCommand store = new MySqlCommand("INSERT INTO `layer` (LibraryCode, Level, RoomNumber, Shelf, ColumnNumber, Tier, LayerCode) VALUES ('"
-                    + libCode + "','" + level +"','" + room + "','" + shelf + "','" + column + "','" + tier +"','" + lCode + "')", mycon);
-                store.ExecuteNonQuery();
-                mycon.Close();
+                result = layer["LayerCode"].ToString();
+                if (result.Equals(layerCode))
+                {
+                    flag = true;
+                }
+                else
+                {
+                    flag = false;
+                }
             }
-            catch(Exception ex)
+
+            if(flag == false)
             {
-                MessageBox.Show(ex.Message);
+                try
+                {
+                    mycon.Open();
+                    MySqlCommand store = new MySqlCommand("INSERT INTO `layer` (LibraryCode, Level, RoomNumber, Shelf, ColumnNumber, Tier, LayerCode) VALUES ('"
+                        + libCode + "','" + level + "','" + room + "','" + shelf + "','" + column + "','" + tier + "','" + lCode + "')", mycon);
+                    store.ExecuteNonQuery();
+                    mycon.Close();
+                }
+                catch (Exception ex)
+                {
+                    //MessageBox.Show(ex.Message);
+                }
             }
         }
 
