@@ -3,6 +3,7 @@
 ### Important
 
 1. ~~After imported into a new computer, make sure to change the port No. Otherwise, the program cannot run.~~
+2. Before shutting down the application, press the "stop scan" button (if you can), otherwise, the scanner will automatically scan books when connected next time.
 
 ---
 
