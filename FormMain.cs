@@ -13,6 +13,10 @@ using System.Net.Http;
 using Newtonsoft.Json;
 using System.Text;
 using System.Net;
+using System.Collections.Generic;
+using Newtonsoft;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace SingleReaderTest
 {
@@ -40,7 +44,9 @@ namespace SingleReaderTest
 
         public FormMain()
         {
+
             InitializeComponent();
+            
             //traversing all possible serial ports, use the first one
             string[] serialPort = SerialPort.GetPortNames();
             reader = new IRP1.Reader("Reader1", "RS232", serialPort[0] + ",115200");
@@ -274,7 +280,7 @@ namespace SingleReaderTest
                         isAdd = false;
                         count = int.Parse(dr["Count"].ToString()) + 1;
                         dr["Count"] = count;
-                        if (dbisConnect == true && epc[9] != '2') 
+                        if (dbisConnect == true && epc[9] != '2')
                         {
                             if (whetherInDB(epc) == true)
                             {
@@ -301,7 +307,7 @@ namespace SingleReaderTest
                     {
                         transformAndStore(epc);
                     }
-                    else if (dbisConnect == true  && epc[9] != '2')
+                    else if (dbisConnect == true && epc[9] != '2')
                     {
                         String temp = mydr["count"].ToString();
                         int.TryParse(temp, out count);
@@ -377,12 +383,32 @@ namespace SingleReaderTest
             }
             return false;
         }
+        #region class types of json response
+        public class Book
+        {
+            public string barcode { get; set; }
+            public string title { get; set; }
+            public string callNo { get; set; }
+            public string isbn { get; set; }
+        }
+
+        public class Data
+        {
+            public List<Book> book { get; set; }
+        }
+
+        public class RootObject
+        {
+            public string code { get; set; }
+            public string message { get; set; }
+            public Data data { get; set; }
+        }
+        #endregion
 
         private void transformAndStore(string epc)
         {
             string temp;
             string layerCode = "01";
-            int lCode;
             MySqlDataAdapter mysda = new MySqlDataAdapter("SELECT LayerCode FROM `layer` ", mycon);
             DataTable dt = new DataTable();
             string result = " ";
@@ -394,7 +420,7 @@ namespace SingleReaderTest
             temp = epc.Substring(10, 2);//level code
             int level = Convert.ToInt32(temp, 16);
             level = level / 8;
-            layerCode += level.ToString().PadLeft(2,'0');
+            layerCode += level.ToString().PadLeft(2, '0');
             temp = epc.Substring(12, 1);//room code
             int room = Convert.ToInt32(temp, 16);
             room = room / 2;
@@ -411,6 +437,7 @@ namespace SingleReaderTest
             int tier = Convert.ToInt32(temp, 16);
             tier = tier / 2;
             layerCode += tier.ToString().PadLeft(2, '0');
+            
             
 
             mysda.Fill(dt);
@@ -451,8 +478,8 @@ namespace SingleReaderTest
                 req.Method = "POST";
                 req.ContentType = "application/json";
                 //keyword
-                //byte[] data = Encoding.UTF8.GetBytes("{\"number\": \"01010100200401\"}");
-                byte[] data = Encoding.UTF8.GetBytes("{\"number\": \" " + layerCode + "\"}");
+                byte[] data = Encoding.UTF8.GetBytes("{\"number\": \"01010100200401\"}");
+                //byte[] data = Encoding.UTF8.GetBytes("{\"number\": \" " + layerCode + "\"}");
                 req.ContentLength = data.Length;
                 using (Stream reqStream = req.GetRequestStream())
                 {
@@ -471,7 +498,19 @@ namespace SingleReaderTest
             {
                 MessageBox.Show(ex.ToString());
             }
-            MessageBox.Show(result);
+            JObject @object = (JObject)JsonConvert.DeserializeObject(result);
+            JArray dataBack = (JArray)@object["data"]["book"];
+            for (int i = 0; i < dataBack.Count; i++)
+            {
+                JObject item = (JObject)dataBack[i];
+                string barcode = (string)item["barcode"];
+                string title = (string)item["title"];
+                string callNo = (string)item["callNo"];
+                string isbn = (string)item["isbn"];
+                //tbJson.Text = cardID + '\t' + startAddress + '\t' + stopAddress + '\t' + money + '\n';
+                MessageBox.Show(barcode);
+            }
+
         }
 
 
