@@ -9,6 +9,10 @@ using System.Threading;
 using System.IO;
 using System.IO.Ports;
 using MySql.Data.MySqlClient;
+using System.Net.Http;
+using Newtonsoft.Json;
+using System.Text;
+using System.Net;
 
 namespace SingleReaderTest
 {
@@ -377,7 +381,7 @@ namespace SingleReaderTest
         private void transformAndStore(string epc)
         {
             string temp;
-            string layerCode = "";
+            string layerCode = "01";
             int lCode;
             MySqlDataAdapter mysda = new MySqlDataAdapter("SELECT LayerCode FROM `layer` ", mycon);
             DataTable dt = new DataTable();
@@ -386,28 +390,28 @@ namespace SingleReaderTest
 
             temp = epc.Substring(2, 4);
             int libCode = Convert.ToInt32(temp, 16);
-            layerCode = libCode.ToString();
-            temp = epc.Substring(10, 2);
+            //the library code does not need to be added onto the layer code
+            temp = epc.Substring(10, 2);//level code
             int level = Convert.ToInt32(temp, 16);
             level = level / 8;
-            layerCode += level.ToString();
-            temp = epc.Substring(12, 1);
+            layerCode += level.ToString().PadLeft(2,'0');
+            temp = epc.Substring(12, 1);//room code
             int room = Convert.ToInt32(temp, 16);
             room = room / 2;
-            layerCode += room.ToString();
-            temp = epc.Substring(13, 3);
+            layerCode += room.ToString().PadLeft(2, '0');
+            temp = epc.Substring(13, 3);//shelf code
             int shelf = Convert.ToInt32(temp, 16);
             shelf = shelf / 8;
-            layerCode += shelf.ToString();
-            temp = epc.Substring(16, 2);
+            layerCode += shelf.ToString().PadLeft(3, '0');
+            temp = epc.Substring(16, 2);//column code
             int column = Convert.ToInt32(temp, 16);
             column = column / 2;
-            layerCode += column.ToString();
-            temp = epc.Substring(18, 1);
+            layerCode += column.ToString().PadLeft(3, '0');
+            temp = epc.Substring(18, 1);//tier code
             int tier = Convert.ToInt32(temp, 16);
             tier = tier / 2;
-            layerCode += tier.ToString();
-            lCode = Int32.Parse(layerCode);
+            layerCode += tier.ToString().PadLeft(2, '0');
+            
 
             mysda.Fill(dt);
             foreach (DataRow layer in dt.Rows)//if the layer code has already been stored into database, skip the process
@@ -423,13 +427,13 @@ namespace SingleReaderTest
                 }
             }
 
-            if(flag == false)
+            if (flag == false)
             {
                 try
                 {
                     mycon.Open();
                     MySqlCommand store = new MySqlCommand("INSERT INTO `layer` (LibraryCode, Level, RoomNumber, Shelf, ColumnNumber, Tier, LayerCode) VALUES ('"
-                        + libCode + "','" + level + "','" + room + "','" + shelf + "','" + column + "','" + tier + "','" + lCode + "')", mycon);
+                        + libCode + "','" + level + "','" + room + "','" + shelf + "','" + column + "','" + tier + "','" + layerCode + "')", mycon);
                     store.ExecuteNonQuery();
                     mycon.Close();
                 }
@@ -438,7 +442,38 @@ namespace SingleReaderTest
                     //MessageBox.Show(ex.Message);
                 }
             }
+
+
+            try
+            {
+                //the link is provided by UIC Library staffs
+                HttpWebRequest req = (HttpWebRequest)WebRequest.Create("http://lrctest.uic.edu.hk/Robot/api/getBarcode");
+                req.Method = "POST";
+                req.ContentType = "application/json";
+                //keyword
+                //byte[] data = Encoding.UTF8.GetBytes("{\"number\": \"01010100200401\"}");
+                byte[] data = Encoding.UTF8.GetBytes("{\"number\": \" " + layerCode + "\"}");
+                req.ContentLength = data.Length;
+                using (Stream reqStream = req.GetRequestStream())
+                {
+                    reqStream.Write(data, 0, data.Length);
+                    reqStream.Close();
+                }
+                System.Net.HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
+                Stream stream = resp.GetResponseStream();
+                //acquire results from UIC library server
+                using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
+                {
+                    result = reader.ReadToEnd();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            MessageBox.Show(result);
         }
+
 
         private void compare()
         {
