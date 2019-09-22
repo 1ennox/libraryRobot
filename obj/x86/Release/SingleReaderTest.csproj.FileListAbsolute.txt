@@ -179,3 +179,27 @@ E:\Github files\libraryRobot\obj\x86\Release\SingleReaderTest.exe
 E:\Github files\libraryRobot\obj\x86\Release\SingleReaderTest.pdb
 C:\Users\lennox\Desktop\libraryRobot\bin\Release\Newtonsoft.Json.dll
 C:\Users\lennox\Desktop\libraryRobot\bin\Release\Newtonsoft.Json.xml
+C:\Users\Anbul\Desktop\fyp\9.21 尝试POST\libraryRobot\bin\Release\SingleReaderTest.exe.config
+C:\Users\Anbul\Desktop\fyp\9.21 尝试POST\libraryRobot\bin\Release\SingleReaderTest.exe
+C:\Users\Anbul\Desktop\fyp\9.21 尝试POST\libraryRobot\bin\Release\SingleReaderTest.pdb
+C:\Users\Anbul\Desktop\fyp\9.21 尝试POST\libraryRobot\bin\Release\Communication.dll
+C:\Users\Anbul\Desktop\fyp\9.21 尝试POST\libraryRobot\bin\Release\Invengo.Language.dll
+C:\Users\Anbul\Desktop\fyp\9.21 尝试POST\libraryRobot\bin\Release\IRP1.dll
+C:\Users\Anbul\Desktop\fyp\9.21 尝试POST\libraryRobot\bin\Release\Newtonsoft.Json.dll
+C:\Users\Anbul\Desktop\fyp\9.21 尝试POST\libraryRobot\bin\Release\RFIDInterface.dll
+C:\Users\Anbul\Desktop\fyp\9.21 尝试POST\libraryRobot\bin\Release\Newtonsoft.Json.xml
+C:\Users\Anbul\Desktop\fyp\9.21 尝试POST\libraryRobot\obj\x86\Release\SingleReaderTest.csprojResolveAssemblyReference.cache
+C:\Users\Anbul\Desktop\fyp\9.21 尝试POST\libraryRobot\obj\x86\Release\SingleReaderTest.detailDB.resources
+C:\Users\Anbul\Desktop\fyp\9.21 尝试POST\libraryRobot\obj\x86\Release\SingleReaderTest.compareReport.resources
+C:\Users\Anbul\Desktop\fyp\9.21 尝试POST\libraryRobot\obj\x86\Release\SingleReaderTest.FormGPIO.resources
+C:\Users\Anbul\Desktop\fyp\9.21 尝试POST\libraryRobot\obj\x86\Release\SingleReaderTest.FormHelp.resources
+C:\Users\Anbul\Desktop\fyp\9.21 尝试POST\libraryRobot\obj\x86\Release\SingleReaderTest.FormMain.resources
+C:\Users\Anbul\Desktop\fyp\9.21 尝试POST\libraryRobot\obj\x86\Release\SingleReaderTest.FormReaderConfig.resources
+C:\Users\Anbul\Desktop\fyp\9.21 尝试POST\libraryRobot\obj\x86\Release\SingleReaderTest.FormScanConfig.resources
+C:\Users\Anbul\Desktop\fyp\9.21 尝试POST\libraryRobot\obj\x86\Release\SingleReaderTest.Properties.Resources.resources
+C:\Users\Anbul\Desktop\fyp\9.21 尝试POST\libraryRobot\obj\x86\Release\SingleReaderTest.storageForm.resources
+C:\Users\Anbul\Desktop\fyp\9.21 尝试POST\libraryRobot\obj\x86\Release\SingleReaderTest.csproj.GenerateResource.cache
+C:\Users\Anbul\Desktop\fyp\9.21 尝试POST\libraryRobot\obj\x86\Release\SingleReaderTest.csproj.CoreCompileInputs.cache
+C:\Users\Anbul\Desktop\fyp\9.21 尝试POST\libraryRobot\obj\x86\Release\SingleReaderTest.csproj.CopyComplete
+C:\Users\Anbul\Desktop\fyp\9.21 尝试POST\libraryRobot\obj\x86\Release\SingleReaderTest.exe
+C:\Users\Anbul\Desktop\fyp\9.21 尝试POST\libraryRobot\obj\x86\Release\SingleReaderTest.pdb

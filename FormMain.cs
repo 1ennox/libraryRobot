@@ -46,7 +46,7 @@ namespace SingleReaderTest
         {
 
             InitializeComponent();
-            
+
             //traversing all possible serial ports, use the first one
             string[] serialPort = SerialPort.GetPortNames();
             //reader = new IRP1.Reader("Reader1", "RS232", serialPort[0] + ",115200");
@@ -437,8 +437,8 @@ namespace SingleReaderTest
             int tier = Convert.ToInt32(temp, 16);
             tier = tier / 2;
             layerCode += tier.ToString().PadLeft(2, '0');
-            
-            
+
+
 
             mysda.Fill(dt);
             foreach (DataRow layer in dt.Rows)//if the layer code has already been stored into database, skip the process
@@ -459,14 +459,15 @@ namespace SingleReaderTest
                 try
                 {
                     mycon.Open();
-                    MySqlCommand store = new MySqlCommand("INSERT INTO `layer` (LibraryCode, Level, RoomNumber, Shelf, ColumnNumber, Tier, LayerCode) VALUES ('"
+                    MySqlCommand store = new MySqlCommand("INSERT INTO layer (LibraryCode, Level, RoomNumber, Shelf, ColumnNumber, Tier, LayerCode) VALUES ('"
                         + libCode + "','" + level + "','" + room + "','" + shelf + "','" + column + "','" + tier + "','" + layerCode + "')", mycon);
                     store.ExecuteNonQuery();
                     mycon.Close();
+                    MessageBox.Show(layerCode);
                 }
                 catch (Exception ex)
                 {
-                    //MessageBox.Show(ex.Message);
+                    MessageBox.Show(ex.Message);
                 }
             }
 
@@ -498,6 +499,8 @@ namespace SingleReaderTest
             {
                 MessageBox.Show(ex.ToString());
             }
+
+            //Transform JObject to JArray
             JObject @object = (JObject)JsonConvert.DeserializeObject(result);
             JArray dataBack = (JArray)@object["data"]["book"];
             for (int i = 0; i < dataBack.Count; i++)
@@ -508,11 +511,27 @@ namespace SingleReaderTest
                 string callNo = (string)item["callNo"];
                 string isbn = (string)item["isbn"];
                 //tbJson.Text = cardID + '\t' + startAddress + '\t' + stopAddress + '\t' + money + '\n';
-                MessageBox.Show(barcode);
+                //MessageBox.Show(title);
+
+                //store in database
+                InsertLayerInfo(barcode, title, callNo, isbn);
             }
 
         }
 
+        private void InsertLayerInfo(string barcode, string title, string callNo, string isbn)
+        {
+            try
+            {
+                MySqlCommand storeLayerInfo = new MySqlCommand("INSERT INTO book (barcode, title, callNo, isbn) VALUES ('"
+                        + barcode + "','" +  title + "','" + callNo + "','" + isbn + "')", mycon);
+                storeLayerInfo.ExecuteNonQuery();
+            }
+            catch (Exception ee)
+            {
+                MessageBox.Show(ee.Message);
+            }
+        }
 
         private void compare()
         {
