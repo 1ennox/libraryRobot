@@ -49,7 +49,7 @@ namespace SingleReaderTest
             
             //traversing all possible serial ports, use the first one
             string[] serialPort = SerialPort.GetPortNames();
-            reader = new IRP1.Reader("Reader1", "RS232", serialPort[0] + ",115200");
+            //reader = new IRP1.Reader("Reader1", "RS232", serialPort[0] + ",115200");
 
             this.FormClosed += new FormClosedEventHandler(FormMain_FormClosed);
 
