@@ -37,7 +37,7 @@ namespace SingleReaderTest
         object lockobj = new object();//显示数据锁定
         bool isTryReconnNet = false;
         int tryReconnNetTimeSpan;
-        //Database connection test
+        //Database connection
         MySqlConnection mycon = new MySqlConnection("Server=127.0.0.1;User Id=root;password=;Database=test");
         string tableName = " ";
         bool dbisConnect = false;
@@ -49,7 +49,7 @@ namespace SingleReaderTest
 
             //traversing all possible serial ports, use the first one
             string[] serialPort = SerialPort.GetPortNames();
-            //reader = new IRP1.Reader("Reader1", "RS232", serialPort[0] + ",115200");
+            reader = new IRP1.Reader("Reader1", "RS232", serialPort[0] + ",115200");
 
             this.FormClosed += new FormClosedEventHandler(FormMain_FormClosed);
 
@@ -60,7 +60,6 @@ namespace SingleReaderTest
                 //port.Open();
             }
 
-            //InitializeComponent();
             myDt.Columns.Add("EPC");
             myDt.Columns.Add("TID");
             myDt.Columns.Add("Userdata");
@@ -510,8 +509,6 @@ namespace SingleReaderTest
                 string title = (string)item["title"];
                 string callNo = (string)item["callNo"];
                 string isbn = (string)item["isbn"];
-                //tbJson.Text = cardID + '\t' + startAddress + '\t' + stopAddress + '\t' + money + '\n';
-                //MessageBox.Show(title);
 
                 //store in database
                 InsertLayerInfo(barcode, title, callNo, isbn);
