@@ -179,3 +179,5 @@ E:\Github files\libraryRobot\obj\x86\Release\SingleReaderTest.exe
 E:\Github files\libraryRobot\obj\x86\Release\SingleReaderTest.pdb
 C:\Users\lennox\Desktop\libraryRobot\bin\Release\Newtonsoft.Json.dll
 C:\Users\lennox\Desktop\libraryRobot\bin\Release\Newtonsoft.Json.xml
+E:\Github files\libraryRobot\bin\Release\Newtonsoft.Json.dll
+E:\Github files\libraryRobot\bin\Release\Newtonsoft.Json.xml
