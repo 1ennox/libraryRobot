@@ -539,17 +539,71 @@ namespace SingleReaderTest
         {
             long code;
             string barcode = "A";
+            string result = "";
             string temp = epc.Substring(10, 10);
             try
             {
                 code = Convert.ToInt64(temp, 16);
-                temp = code.ToString().Substring(3, 8);
+                temp = code.ToString().Substring(2, 9);
                 barcode += temp;
                 MessageBox.Show(barcode);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+
+            try
+            {
+                //the link is provided by UIC Library staffs
+                HttpWebRequest req = (HttpWebRequest)WebRequest.Create("http://lrctest.uic.edu.hk/Robot/api/getLayerCode");
+                req.Method = "POST";
+                req.ContentType = "application/json";
+                //keyword
+                byte[] data = Encoding.UTF8.GetBytes("{\"barcode\":\"" + barcode + "\"}");
+                req.ContentLength = data.Length;
+                using (Stream reqStream = req.GetRequestStream())
+                {
+                    reqStream.Write(data, 0, data.Length);
+                    reqStream.Close();
+                }
+                System.Net.HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
+                Stream stream = resp.GetResponseStream();
+                //acquire results from UIC library server
+                using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
+                {
+                    result = reader.ReadToEnd();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
+            //Transform JObject to JArray
+            JObject @object = (JObject)JsonConvert.DeserializeObject(result);
+            JArray dataBack = (JArray)@object["data"]["code"];
+            for (int i = 0; i < dataBack.Count; i++)
+            {
+                JObject item = (JObject)dataBack[i];
+                string layercode = (string)item["number"];
+                //store in database
+                InsertBookInfo(barcode, layercode);
+            }
+        }
+        private void InsertBookInfo(String barcode, String layercode)
+        {
+            try
+            {
+                mycon.Open();
+                MySqlCommand storeLayerInfo = new MySqlCommand("INSERT INTO bookread (barCode, layerCode) VALUES ('"
+                        + barcode + "','" + layercode + "')", mycon);
+                storeLayerInfo.ExecuteNonQuery();
+                mycon.Close();
+            }
+            catch (Exception ee)
+            {
+                MessageBox.Show(ee.Message);
             }
         }
 
