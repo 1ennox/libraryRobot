@@ -305,6 +305,14 @@ namespace SingleReaderTest
                     {
                         transformAndStore(epc);
                     }
+                    else if(epc[9] == '0')//0 stands for book code
+                    {
+                        string barcode = "A";
+                        string temp;
+                        temp = convertBookLayer(epc).Substring(3, 8);
+                        barcode += temp;
+                        MessageBox.Show(barcode);
+                    }
                     else if (dbisConnect == true && epc[9] != '2')
                     {
                         String temp = mydr["count"].ToString();
@@ -529,6 +537,23 @@ namespace SingleReaderTest
             {
                 MessageBox.Show(ee.Message);
             }
+        }
+
+        private string convertBookLayer(string epc)
+        {
+            long barcode;
+            string temp = epc.Substring(10, 10);
+            try
+            {
+                barcode = Convert.ToInt64(temp, 16);
+                MessageBox.Show(barcode.ToString());
+                return barcode.ToString();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return "Error";
         }
 
         private void compare()
