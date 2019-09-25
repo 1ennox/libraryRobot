@@ -307,11 +307,7 @@ namespace SingleReaderTest
                     }
                     else if(epc[9] == '0')//0 stands for book code
                     {
-                        string barcode = "A";
-                        string temp;
-                        temp = convertBookLayer(epc).Substring(3, 8);
-                        barcode += temp;
-                        MessageBox.Show(barcode);
+                        convertBookLayer(epc);
                     }
                     else if (dbisConnect == true && epc[9] != '2')
                     {
@@ -539,21 +535,22 @@ namespace SingleReaderTest
             }
         }
 
-        private string convertBookLayer(string epc)
+        private void convertBookLayer(string epc)
         {
-            long barcode;
+            long code;
+            string barcode = "A";
             string temp = epc.Substring(10, 10);
             try
             {
-                barcode = Convert.ToInt64(temp, 16);
-                MessageBox.Show(barcode.ToString());
-                return barcode.ToString();
+                code = Convert.ToInt64(temp, 16);
+                temp = code.ToString().Substring(3, 8);
+                barcode += temp;
+                MessageBox.Show(barcode);
             }
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
-            return "Error";
         }
 
         private void compare()
