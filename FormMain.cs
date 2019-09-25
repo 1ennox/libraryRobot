@@ -15,7 +15,6 @@ using System.Text;
 using System.Net;
 using System.Collections.Generic;
 using Newtonsoft;
-using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace SingleReaderTest
@@ -61,14 +60,14 @@ namespace SingleReaderTest
             }
 
             myDt.Columns.Add("EPC");
-            myDt.Columns.Add("TID");
-            myDt.Columns.Add("Userdata");
+            //myDt.Columns.Add("TID");
+            //myDt.Columns.Add("Userdata");
             myDt.Columns.Add("Count");
             dataGridView1.DataSource = myDt;
             dataGridView1.Columns[0].HeaderText = "EPC";
-            dataGridView1.Columns[1].HeaderText = "TID/ID";
-            dataGridView1.Columns[2].HeaderText = "Data";
-            dataGridView1.Columns[3].HeaderText = "Count";
+            //dataGridView1.Columns[1].HeaderText = "TID/ID";
+            //dataGridView1.Columns[2].HeaderText = "Data";
+            dataGridView1.Columns[1].HeaderText = "Count";
 
             IRP1.Reader.OnApiException += new Core.ApiExceptionHandle(Reader_OnApiException);
         }
@@ -274,7 +273,7 @@ namespace SingleReaderTest
                 foreach (DataRow dr in myDt.Rows)
                 {
                     if ((dr["EPC"] != null && dr["EPC"].ToString() != "" && dr["EPC"].ToString() == epc)
-                        || (dr["TID"] != null && dr["TID"].ToString() != "" && dr["TID"].ToString() == tid))
+                        /*|| (dr["TID"] != null && dr["TID"].ToString() != "" && dr["TID"].ToString() == tid)*/)
                     {
                         isAdd = false;
                         count = int.Parse(dr["Count"].ToString()) + 1;
@@ -297,8 +296,8 @@ namespace SingleReaderTest
                 {
                     DataRow mydr = myDt.NewRow();
                     mydr["EPC"] = epc;
-                    mydr["TID"] = tid;
-                    mydr["Userdata"] = Core.Util.ConvertByteArrayToHexString(msg.ReceivedMessage.UserData);
+                    //mydr["TID"] = tid;
+                    //mydr["Userdata"] = Core.Util.ConvertByteArrayToHexString(msg.ReceivedMessage.UserData);
                     mydr["Count"] = 1;
                     myDt.Rows.Add(mydr);
                     //add data to database
@@ -467,53 +466,55 @@ namespace SingleReaderTest
                 catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
+                    flag = true;
                 }
             }
 
-
-            try
+            if(flag == false)
             {
-                //the link is provided by UIC Library staffs
-                HttpWebRequest req = (HttpWebRequest)WebRequest.Create("http://lrctest.uic.edu.hk/Robot/api/getBarcode");
-                req.Method = "POST";
-                req.ContentType = "application/json";
-                //keyword
-                byte[] data = Encoding.UTF8.GetBytes("{\"number\": \"01010100200401\"}");
-                //byte[] data = Encoding.UTF8.GetBytes("{\"number\": \" " + layerCode + "\"}");
-                req.ContentLength = data.Length;
-                using (Stream reqStream = req.GetRequestStream())
+                try
                 {
-                    reqStream.Write(data, 0, data.Length);
-                    reqStream.Close();
+                    //the link is provided by UIC Library staffs
+                    HttpWebRequest req = (HttpWebRequest)WebRequest.Create("http://lrctest.uic.edu.hk/Robot/api/getBarcode");
+                    req.Method = "POST";
+                    req.ContentType = "application/json";
+                    //keyword
+                    byte[] data = Encoding.UTF8.GetBytes("{\"number\": \"01010100200401\"}");
+                    //byte[] data = Encoding.UTF8.GetBytes("{\"number\": \" " + layerCode + "\"}");
+                    req.ContentLength = data.Length;
+                    using (Stream reqStream = req.GetRequestStream())
+                    {
+                        reqStream.Write(data, 0, data.Length);
+                        reqStream.Close();
+                    }
+                    System.Net.HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
+                    Stream stream = resp.GetResponseStream();
+                    //acquire results from UIC library server
+                    using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
+                    {
+                        result = reader.ReadToEnd();
+                    }
                 }
-                System.Net.HttpWebResponse resp = (HttpWebResponse)req.GetResponse();
-                Stream stream = resp.GetResponseStream();
-                //acquire results from UIC library server
-                using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
+                catch (Exception ex)
                 {
-                    result = reader.ReadToEnd();
+                    MessageBox.Show(ex.ToString());
+                }
+
+                //Transform JObject to JArray
+                JObject @object = (JObject)JsonConvert.DeserializeObject(result);
+                JArray dataBack = (JArray)@object["data"]["book"];
+                for (int i = 0; i < dataBack.Count; i++)
+                {
+                    JObject item = (JObject)dataBack[i];
+                    string barcode = (string)item["barcode"];
+                    string title = (string)item["title"];
+                    string callNo = (string)item["callNo"];
+                    string isbn = (string)item["isbn"];
+
+                    //store in database
+                    InsertLayerInfo(barcode, title, callNo, isbn);
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.ToString());
-            }
-
-            //Transform JObject to JArray
-            JObject @object = (JObject)JsonConvert.DeserializeObject(result);
-            JArray dataBack = (JArray)@object["data"]["book"];
-            for (int i = 0; i < dataBack.Count; i++)
-            {
-                JObject item = (JObject)dataBack[i];
-                string barcode = (string)item["barcode"];
-                string title = (string)item["title"];
-                string callNo = (string)item["callNo"];
-                string isbn = (string)item["isbn"];
-
-                //store in database
-                InsertLayerInfo(barcode, title, callNo, isbn);
-            }
-
         }
 
         private void InsertLayerInfo(string barcode, string title, string callNo, string isbn)

@@ -22,3 +22,29 @@ E:\Github files\libraryRobot\obj\x86\Release\SingleReaderTest.csproj.CoreCompile
 E:\Github files\libraryRobot\obj\x86\Release\SingleReaderTest.csproj.CopyComplete
 E:\Github files\libraryRobot\obj\x86\Release\SingleReaderTest.exe
 E:\Github files\libraryRobot\obj\x86\Release\SingleReaderTest.pdb
+C:\Users\lennox\Desktop\Final Year Project\libraryRobot\bin\Release\SingleReaderTest.exe.config
+C:\Users\lennox\Desktop\Final Year Project\libraryRobot\bin\Release\SingleReaderTest.exe
+C:\Users\lennox\Desktop\Final Year Project\libraryRobot\bin\Release\SingleReaderTest.pdb
+C:\Users\lennox\Desktop\Final Year Project\libraryRobot\bin\Release\Communication.dll
+C:\Users\lennox\Desktop\Final Year Project\libraryRobot\bin\Release\Invengo.Language.dll
+C:\Users\lennox\Desktop\Final Year Project\libraryRobot\bin\Release\IRP1.dll
+C:\Users\lennox\Desktop\Final Year Project\libraryRobot\bin\Release\MySql.Data.dll
+C:\Users\lennox\Desktop\Final Year Project\libraryRobot\bin\Release\Newtonsoft.Json.dll
+C:\Users\lennox\Desktop\Final Year Project\libraryRobot\bin\Release\RFIDInterface.dll
+C:\Users\lennox\Desktop\Final Year Project\libraryRobot\bin\Release\MySql.Data.xml
+C:\Users\lennox\Desktop\Final Year Project\libraryRobot\bin\Release\Newtonsoft.Json.xml
+C:\Users\lennox\Desktop\Final Year Project\libraryRobot\obj\x86\Release\SingleReaderTest.csprojAssemblyReference.cache
+C:\Users\lennox\Desktop\Final Year Project\libraryRobot\obj\x86\Release\SingleReaderTest.detailDB.resources
+C:\Users\lennox\Desktop\Final Year Project\libraryRobot\obj\x86\Release\SingleReaderTest.compareReport.resources
+C:\Users\lennox\Desktop\Final Year Project\libraryRobot\obj\x86\Release\SingleReaderTest.FormGPIO.resources
+C:\Users\lennox\Desktop\Final Year Project\libraryRobot\obj\x86\Release\SingleReaderTest.FormHelp.resources
+C:\Users\lennox\Desktop\Final Year Project\libraryRobot\obj\x86\Release\SingleReaderTest.FormMain.resources
+C:\Users\lennox\Desktop\Final Year Project\libraryRobot\obj\x86\Release\SingleReaderTest.FormReaderConfig.resources
+C:\Users\lennox\Desktop\Final Year Project\libraryRobot\obj\x86\Release\SingleReaderTest.FormScanConfig.resources
+C:\Users\lennox\Desktop\Final Year Project\libraryRobot\obj\x86\Release\SingleReaderTest.Properties.Resources.resources
+C:\Users\lennox\Desktop\Final Year Project\libraryRobot\obj\x86\Release\SingleReaderTest.storageForm.resources
+C:\Users\lennox\Desktop\Final Year Project\libraryRobot\obj\x86\Release\SingleReaderTest.csproj.GenerateResource.cache
+C:\Users\lennox\Desktop\Final Year Project\libraryRobot\obj\x86\Release\SingleReaderTest.csproj.CoreCompileInputs.cache
+C:\Users\lennox\Desktop\Final Year Project\libraryRobot\obj\x86\Release\SingleReaderTest.csproj.CopyComplete
+C:\Users\lennox\Desktop\Final Year Project\libraryRobot\obj\x86\Release\SingleReaderTest.exe
+C:\Users\lennox\Desktop\Final Year Project\libraryRobot\obj\x86\Release\SingleReaderTest.pdb
