@@ -535,7 +535,7 @@ namespace SingleReaderTest
             }
         }
 
-        private void convertBookLayer(string epc)
+        private void convertBookLayer(string epc)//acquire the layer number that the book belongs to
         {
             long code;
             string barcode = "A";
@@ -546,7 +546,6 @@ namespace SingleReaderTest
                 code = Convert.ToInt64(temp, 16);
                 temp = code.ToString().Substring(2, 9);
                 barcode += temp;
-                MessageBox.Show(barcode);
             }
             catch (Exception ex)
             {
@@ -591,8 +590,9 @@ namespace SingleReaderTest
                 InsertBookInfo(barcode, layercode);
             }
         }
-        private void InsertBookInfo(String barcode, String layercode)
+        private void InsertBookInfo(String barcode, String layercode)//store both book's barcode and layercode
         {
+            MessageBox.Show(barcode + " belongs to " + layercode);
             try
             {
                 mycon.Open();
