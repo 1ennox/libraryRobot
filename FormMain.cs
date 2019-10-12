@@ -24,9 +24,6 @@ namespace SingleReaderTest
         // 实例化读写器类
         SerialPort port;
 
-        //laptop only (if the traversing method is ok, then delete this one)
-        //IRP1.Reader reader = new IRP1.Reader("Reader1", "RS232", "COM9,115200");//串口
-
         //desktop
         IRP1.Reader reader;//串口
 
@@ -60,14 +57,12 @@ namespace SingleReaderTest
             }
 
             myDt.Columns.Add("EPC");
-            //myDt.Columns.Add("TID");
-            //myDt.Columns.Add("Userdata");
+            myDt.Columns.Add("barcode");
             myDt.Columns.Add("Count");
             dataGridView1.DataSource = myDt;
             dataGridView1.Columns[0].HeaderText = "EPC";
-            //dataGridView1.Columns[1].HeaderText = "TID/ID";
-            //dataGridView1.Columns[2].HeaderText = "Data";
-            dataGridView1.Columns[1].HeaderText = "Count";
+            dataGridView1.Columns[1].HeaderText = "Barcode";
+            dataGridView1.Columns[2].HeaderText = "Count";
 
             IRP1.Reader.OnApiException += new Core.ApiExceptionHandle(Reader_OnApiException);
         }
@@ -268,12 +263,12 @@ namespace SingleReaderTest
             {
                 bool isAdd = true;
                 int count = 0;
+                string barcode;
                 string epc = Core.Util.ConvertByteArrayToHexString(msg.ReceivedMessage.EPC);
                 string tid = Core.Util.ConvertByteArrayToHexString(msg.ReceivedMessage.TID);
                 foreach (DataRow dr in myDt.Rows)
                 {
-                    if ((dr["EPC"] != null && dr["EPC"].ToString() != "" && dr["EPC"].ToString() == epc)
-                        /*|| (dr["TID"] != null && dr["TID"].ToString() != "" && dr["TID"].ToString() == tid)*/)
+                    if ((dr["EPC"] != null && dr["EPC"].ToString() != "" && dr["EPC"].ToString() == epc))
                     {
                         isAdd = false;
                         count = int.Parse(dr["Count"].ToString()) + 1;
@@ -296,8 +291,6 @@ namespace SingleReaderTest
                 {
                     DataRow mydr = myDt.NewRow();
                     mydr["EPC"] = epc;
-                    //mydr["TID"] = tid;
-                    //mydr["Userdata"] = Core.Util.ConvertByteArrayToHexString(msg.ReceivedMessage.UserData);
                     mydr["Count"] = 1;
                     myDt.Rows.Add(mydr);
                     //add data to database
@@ -307,7 +300,8 @@ namespace SingleReaderTest
                     }
                     else if (epc[9] == '0')//0 stands for book code
                     {
-                        convertBookLayer(epc);
+                        barcode = convertBookLayer(epc);
+                        mydr["barcode"] = barcode;
                     }
                     else if (dbisConnect == true && epc[9] != '2')
                     {
@@ -484,8 +478,8 @@ namespace SingleReaderTest
                     req.Method = "POST";
                     req.ContentType = "application/json";
                     //keyword
-                    byte[] data = Encoding.UTF8.GetBytes("{\"number\": \"01010100200401\"}");
-                    //byte[] data = Encoding.UTF8.GetBytes("{\"number\": \" " + layerCode + "\"}");
+                    //byte[] data = Encoding.UTF8.GetBytes("{\"number\": \"01010100200401\"}");
+                    byte[] data = Encoding.UTF8.GetBytes("{\"number\": \" " + layerCode + "\"}");
                     req.ContentLength = data.Length;
                     using (Stream reqStream = req.GetRequestStream())
                     {
@@ -536,11 +530,10 @@ namespace SingleReaderTest
             }
         }
 
-        private void convertBookLayer(string epc)//acquire the layer number that the book belongs to
+        private string convertBookLayer(string epc)//acquire the layer number that the book belongs to
         {
             long code;
             string barcode = "A";
-            string result = "";
             string temp = epc.Substring(10, 10);
             try
             {
@@ -552,7 +545,13 @@ namespace SingleReaderTest
             {
                 MessageBox.Show(ex.Message);
             }
+            //storeBarcodeLayercode(barcode);
+            return barcode;
+        }
 
+        private void storeBarcodeLayercode(string barcode)
+        {
+            string result = "";
             try
             {
                 //the link is provided by UIC Library staffs
@@ -591,10 +590,9 @@ namespace SingleReaderTest
                 InsertBookInfo(barcode, layercode);
             }
         }
-
-        private void InsertBookInfo(String barcode, String layercode)//store both book's barcode and layercode
+    
+        private void InsertBookInfo(string barcode, String layercode)//store both book's barcode and layercode
         {
-            MessageBox.Show(barcode + " belongs to " + layercode);
             try
             {
                 mycon.Open();
@@ -605,7 +603,7 @@ namespace SingleReaderTest
             }
             catch (Exception ee)
             {
-                MessageBox.Show(ee.Message);
+                //MessageBox.Show(ee.Message);
             }
         }
 
