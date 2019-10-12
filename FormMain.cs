@@ -153,6 +153,7 @@ namespace SingleReaderTest
         // 关闭窗体
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
+            btnStop_Click(sender, e);
             Environment.Exit(Environment.ExitCode);
         }
 
@@ -273,17 +274,17 @@ namespace SingleReaderTest
                         isAdd = false;
                         count = int.Parse(dr["Count"].ToString()) + 1;
                         dr["Count"] = count;
-                        if (dbisConnect == true && epc[9] != '2')
-                        {
-                            if (whetherInDB(epc) == true)
-                            {
-                                updateToDB(epc, count);
-                            }
-                            else
-                            {
-                                insertToDB(epc, count);
-                            }
-                        }
+                        //if (dbisConnect == true && epc[9] != '2')
+                        //{
+                        //    if (whetherInDB(epc) == true)
+                        //    {
+                        //        updateToDB(epc, count);
+                        //    }
+                        //    else
+                        //    {
+                        //        insertToDB(epc, count);
+                        //    }
+                        //}
                     }
                 }
 
@@ -296,7 +297,7 @@ namespace SingleReaderTest
                     //add data to database
                     if (epc[9] == '2')//2 stands for layer code and should be stored into a different database
                     {
-                        layercode = transformAndStore(epc);
+                        layercode = transLayerCode(epc);
                         mydr["barcode"] = "Layer: " + layercode;
                     }
                     else if (epc[9] == '0')//0 stands for book code
@@ -304,12 +305,12 @@ namespace SingleReaderTest
                         barcode = convertBookLayer(epc);
                         mydr["barcode"] = barcode;
                     }
-                    else if (dbisConnect == true && epc[9] != '2')
-                    {
-                        String temp = mydr["count"].ToString();
-                        int.TryParse(temp, out count);
-                        insertToDB(epc, 1);
-                    }
+                    //else if (dbisConnect == true && epc[9] != '2')
+                    //{
+                    //    String temp = mydr["count"].ToString();
+                    //    int.TryParse(temp, out count);
+                    //    insertToDB(epc, 1);
+                    //}
                 }
             }
         }
@@ -403,7 +404,7 @@ namespace SingleReaderTest
         }
         #endregion
 
-        private string transformAndStore(string epc)
+        private string transLayerCode(string epc)
         {
             string temp;
             string layerCode = "01";
@@ -431,11 +432,11 @@ namespace SingleReaderTest
             int tier = Convert.ToInt32(temp, 16);
             tier = tier / 2;
             layerCode += tier.ToString().PadLeft(2, '0');
-            storeLayercode(libCode, level, room, shelf, column, tier, layerCode);
+            fetchLayerInfo(libCode, level, room, shelf, column, tier, layerCode);
             return layerCode;
         }
          
-        private void storeLayercode(int libCode, int level, int room, int shelf, int column, int tier, string layerCode)
+        private void fetchLayerInfo(int libCode, int level, int room, int shelf, int column, int tier, string layerCode)
         {
             MySqlDataAdapter mysda = new MySqlDataAdapter("SELECT LayerCode FROM `layer` ", mycon);
             DataTable dt = new DataTable();
@@ -550,11 +551,11 @@ namespace SingleReaderTest
             {
                 MessageBox.Show(ex.Message);
             }
-            storeBarcodeLayercode(barcode);
+            fetchBarcodeLayercode(barcode);
             return barcode;
         }
 
-        private void storeBarcodeLayercode(string barcode)
+        private void fetchBarcodeLayercode(string barcode)
         {
             string result = "";
             try
@@ -832,6 +833,7 @@ namespace SingleReaderTest
         // 退出
         private void btnExit_Click(object sender, EventArgs e)
         {
+            btnStop_Click(sender, e);
             this.Close();
         }
 
@@ -1000,6 +1002,11 @@ namespace SingleReaderTest
         {
             storageForm storage = new storageForm();
             storage.ShowDialog();
+        }
+
+        private void FormMain_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
