@@ -263,7 +263,7 @@ namespace SingleReaderTest
             {
                 bool isAdd = true;
                 int count = 0;
-                string barcode;
+                string barcode, layercode;
                 string epc = Core.Util.ConvertByteArrayToHexString(msg.ReceivedMessage.EPC);
                 string tid = Core.Util.ConvertByteArrayToHexString(msg.ReceivedMessage.TID);
                 foreach (DataRow dr in myDt.Rows)
@@ -296,7 +296,8 @@ namespace SingleReaderTest
                     //add data to database
                     if (epc[9] == '2')//2 stands for layer code and should be stored into a different database
                     {
-                        transformAndStore(epc);
+                        layercode = transformAndStore(epc);
+                        mydr["barcode"] = "Layer: " + layercode;
                     }
                     else if (epc[9] == '0')//0 stands for book code
                     {
@@ -402,15 +403,11 @@ namespace SingleReaderTest
         }
         #endregion
 
-        private void transformAndStore(string epc)
+        private string transformAndStore(string epc)
         {
             string temp;
             string layerCode = "01";
-            MySqlDataAdapter mysda = new MySqlDataAdapter("SELECT LayerCode FROM `layer` ", mycon);
-            DataTable dt = new DataTable();
-            string result = " ";
-            bool flag = false;
-
+            
             temp = epc.Substring(2, 4);
             int libCode = Convert.ToInt32(temp, 16);
             //the library code does not need to be added onto the layer code
@@ -434,8 +431,16 @@ namespace SingleReaderTest
             int tier = Convert.ToInt32(temp, 16);
             tier = tier / 2;
             layerCode += tier.ToString().PadLeft(2, '0');
-
-
+            storeLayercode(libCode, level, room, shelf, column, tier, layerCode);
+            return layerCode;
+        }
+         
+        private void storeLayercode(int libCode, int level, int room, int shelf, int column, int tier, string layerCode)
+        {
+            MySqlDataAdapter mysda = new MySqlDataAdapter("SELECT LayerCode FROM `layer` ", mycon);
+            DataTable dt = new DataTable();
+            string result = " ";
+            bool flag = false;
 
             mysda.Fill(dt);
             foreach (DataRow layer in dt.Rows)//if the layer code has already been stored into database, skip the process
@@ -464,7 +469,7 @@ namespace SingleReaderTest
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    //MessageBox.Show(ex.Message);
                     flag = true;
                 }
             }
@@ -545,7 +550,7 @@ namespace SingleReaderTest
             {
                 MessageBox.Show(ex.Message);
             }
-            //storeBarcodeLayercode(barcode);
+            storeBarcodeLayercode(barcode);
             return barcode;
         }
 
