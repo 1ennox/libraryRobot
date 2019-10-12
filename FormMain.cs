@@ -17,12 +17,16 @@ using System.Collections.Generic;
 using Newtonsoft;
 using Newtonsoft.Json.Linq;
 
+
 namespace SingleReaderTest
 {
     public partial class FormMain : Form
     {
         // 实例化读写器类
         SerialPort port;
+
+        //laptop only (if the traversing method is ok, then delete this one)
+        //IRP1.Reader reader = new IRP1.Reader("Reader1", "RS232", "COM9,115200");//串口
 
         //desktop
         IRP1.Reader reader;//串口
@@ -37,12 +41,17 @@ namespace SingleReaderTest
         MySqlConnection mycon = new MySqlConnection("Server=127.0.0.1;User Id=root;password=;Database=test");
         string tableName = " ";
         bool dbisConnect = false;
+
         //timer control
         System.Timers.Timer timer = null;
+        long timeCount;
+
         public FormMain()
         {
 
             InitializeComponent();
+
+            
 
             //traversing all possible serial ports, use the first one
             string[] serialPort = SerialPort.GetPortNames();
@@ -58,12 +67,16 @@ namespace SingleReaderTest
             }
 
             myDt.Columns.Add("EPC");
-            myDt.Columns.Add("barcode");
+            //myDt.Columns.Add("TID");
+            //myDt.Columns.Add("Userdata");
             myDt.Columns.Add("Count");
             dataGridView1.DataSource = myDt;
             dataGridView1.Columns[0].HeaderText = "EPC";
-            dataGridView1.Columns[1].HeaderText = "Barcode";
-            dataGridView1.Columns[2].HeaderText = "Count";
+            //dataGridView1.Columns[1].HeaderText = "TID/ID";
+            //dataGridView1.Columns[2].HeaderText = "Data";
+            dataGridView1.Columns[1].HeaderText = "Count";
+
+           
 
             IRP1.Reader.OnApiException += new Core.ApiExceptionHandle(Reader_OnApiException);
         }
@@ -154,7 +167,6 @@ namespace SingleReaderTest
         // 关闭窗体
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
-            btnStop_Click(sender, e);
             Environment.Exit(Environment.ExitCode);
         }
 
@@ -265,27 +277,27 @@ namespace SingleReaderTest
             {
                 bool isAdd = true;
                 int count = 0;
-                string barcode, layercode;
                 string epc = Core.Util.ConvertByteArrayToHexString(msg.ReceivedMessage.EPC);
                 string tid = Core.Util.ConvertByteArrayToHexString(msg.ReceivedMessage.TID);
                 foreach (DataRow dr in myDt.Rows)
                 {
-                    if ((dr["EPC"] != null && dr["EPC"].ToString() != "" && dr["EPC"].ToString() == epc))
+                    if ((dr["EPC"] != null && dr["EPC"].ToString() != "" && dr["EPC"].ToString() == epc)
+                        /*|| (dr["TID"] != null && dr["TID"].ToString() != "" && dr["TID"].ToString() == tid)*/)
                     {
                         isAdd = false;
                         count = int.Parse(dr["Count"].ToString()) + 1;
                         dr["Count"] = count;
-                        //if (dbisConnect == true && epc[9] != '2')
-                        //{
-                        //    if (whetherInDB(epc) == true)
-                        //    {
-                        //        updateToDB(epc, count);
-                        //    }
-                        //    else
-                        //    {
-                        //        insertToDB(epc, count);
-                        //    }
-                        //}
+                        if (dbisConnect == true && epc[9] != '2')
+                        {
+                            if (whetherInDB(epc) == true)
+                            {
+                                updateToDB(epc, count);
+                            }
+                            else
+                            {
+                                insertToDB(epc, count);
+                            }
+                        }
                     }
                 }
 
@@ -293,25 +305,25 @@ namespace SingleReaderTest
                 {
                     DataRow mydr = myDt.NewRow();
                     mydr["EPC"] = epc;
+                    //mydr["TID"] = tid;
+                    //mydr["Userdata"] = Core.Util.ConvertByteArrayToHexString(msg.ReceivedMessage.UserData);
                     mydr["Count"] = 1;
                     myDt.Rows.Add(mydr);
                     //add data to database
                     if (epc[9] == '2')//2 stands for layer code and should be stored into a different database
                     {
-                        layercode = transLayerCode(epc);
-                        mydr["barcode"] = "Layer: " + layercode;
+                        transformAndStore(epc);
                     }
                     else if (epc[9] == '0')//0 stands for book code
                     {
-                        barcode = convertBookLayer(epc);
-                        mydr["barcode"] = barcode;
+                        convertBookLayer(epc);
                     }
-                    //else if (dbisConnect == true && epc[9] != '2')
-                    //{
-                    //    String temp = mydr["count"].ToString();
-                    //    int.TryParse(temp, out count);
-                    //    insertToDB(epc, 1);
-                    //}
+                    else if (dbisConnect == true && epc[9] != '2')
+                    {
+                        String temp = mydr["count"].ToString();
+                        int.TryParse(temp, out count);
+                        insertToDB(epc, 1);
+                    }
                 }
             }
         }
@@ -405,11 +417,15 @@ namespace SingleReaderTest
         }
         #endregion
 
-        private string transLayerCode(string epc)
+        private void transformAndStore(string epc)
         {
             string temp;
             string layerCode = "01";
-            
+            MySqlDataAdapter mysda = new MySqlDataAdapter("SELECT LayerCode FROM `layer` ", mycon);
+            DataTable dt = new DataTable();
+            string result = " ";
+            bool flag = false;
+
             temp = epc.Substring(2, 4);
             int libCode = Convert.ToInt32(temp, 16);
             //the library code does not need to be added onto the layer code
@@ -433,16 +449,8 @@ namespace SingleReaderTest
             int tier = Convert.ToInt32(temp, 16);
             tier = tier / 2;
             layerCode += tier.ToString().PadLeft(2, '0');
-            fetchLayerInfo(libCode, level, room, shelf, column, tier, layerCode);
-            return layerCode;
-        }
-         
-        private void fetchLayerInfo(int libCode, int level, int room, int shelf, int column, int tier, string layerCode)
-        {
-            MySqlDataAdapter mysda = new MySqlDataAdapter("SELECT LayerCode FROM `layer` ", mycon);
-            DataTable dt = new DataTable();
-            string result = " ";
-            bool flag = false;
+
+
 
             mysda.Fill(dt);
             foreach (DataRow layer in dt.Rows)//if the layer code has already been stored into database, skip the process
@@ -471,7 +479,7 @@ namespace SingleReaderTest
                 }
                 catch (Exception ex)
                 {
-                    //MessageBox.Show(ex.Message);
+                    MessageBox.Show(ex.Message);
                     flag = true;
                 }
             }
@@ -485,8 +493,8 @@ namespace SingleReaderTest
                     req.Method = "POST";
                     req.ContentType = "application/json";
                     //keyword
-                    //byte[] data = Encoding.UTF8.GetBytes("{\"number\": \"01010100200401\"}");
-                    byte[] data = Encoding.UTF8.GetBytes("{\"number\": \" " + layerCode + "\"}");
+                    byte[] data = Encoding.UTF8.GetBytes("{\"number\": \"01010100200401\"}");
+                    //byte[] data = Encoding.UTF8.GetBytes("{\"number\": \" " + layerCode + "\"}");
                     req.ContentLength = data.Length;
                     using (Stream reqStream = req.GetRequestStream())
                     {
@@ -537,10 +545,11 @@ namespace SingleReaderTest
             }
         }
 
-        private string convertBookLayer(string epc)//acquire the layer number that the book belongs to
+        private void convertBookLayer(string epc)//acquire the layer number that the book belongs to
         {
             long code;
             string barcode = "A";
+            string result = "";
             string temp = epc.Substring(10, 10);
             try
             {
@@ -552,13 +561,7 @@ namespace SingleReaderTest
             {
                 MessageBox.Show(ex.Message);
             }
-            fetchBarcodeLayercode(barcode);
-            return barcode;
-        }
 
-        private void fetchBarcodeLayercode(string barcode)
-        {
-            string result = "";
             try
             {
                 //the link is provided by UIC Library staffs
@@ -597,9 +600,10 @@ namespace SingleReaderTest
                 InsertBookInfo(barcode, layercode);
             }
         }
-    
-        private void InsertBookInfo(string barcode, String layercode)//store both book's barcode and layercode
+
+        private void InsertBookInfo(String barcode, String layercode)//store both book's barcode and layercode
         {
+            MessageBox.Show(barcode + " belongs to " + layercode);
             try
             {
                 mycon.Open();
@@ -610,7 +614,7 @@ namespace SingleReaderTest
             }
             catch (Exception ee)
             {
-                //MessageBox.Show(ee.Message);
+                MessageBox.Show(ee.Message);
             }
         }
 
@@ -903,7 +907,6 @@ namespace SingleReaderTest
         // 退出
         private void btnExit_Click(object sender, EventArgs e)
         {
-            btnStop_Click(sender, e);
             this.Close();
         }
 
@@ -919,19 +922,13 @@ namespace SingleReaderTest
                     changeCtrlEnable("scan");
                     lblMsg.Text = "Reading tags...";
                 }
-                
+            }
+
+            while(timeCount <= 3)
+            {
+                time_period();
             }
             
-            
-            this.timer = new System.Timers.Timer();
-
-            this.timer.Interval = 3000;
-            
-            
-
-            timer.Elapsed += new System.Timers.ElapsedEventHandler(timer_Tick);
-            timer.Enabled = true;
-
         }
 
 
@@ -940,6 +937,15 @@ namespace SingleReaderTest
             //this.timer.Enabled = false;
             compareBook();
             MessageBox.Show("Time out");
+            timeCount++;
+        }
+
+        private void time_period()
+        {
+            timer = new System.Timers.Timer();
+            timer.Interval = 15000;
+            timer.Elapsed += new System.Timers.ElapsedEventHandler(timer_Tick);
+            timer.Enabled = true;
         }
 
         // 停止扫描
@@ -1092,11 +1098,6 @@ namespace SingleReaderTest
         {
             storageForm storage = new storageForm();
             storage.ShowDialog();
-        }
-
-        private void FormMain_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }
