@@ -44,7 +44,7 @@ namespace SingleReaderTest
 
         //timer control
         System.Timers.Timer timer = null;
-        long timeCount;
+        long timeCount = 0;
 
         public FormMain()
         {
@@ -924,7 +924,7 @@ namespace SingleReaderTest
                 }
             }
 
-            while(timeCount <= 3)
+            while(timeCount < 3)
             {
                 time_period();
             }
