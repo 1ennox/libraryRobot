@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Net.NetworkInformation;
@@ -305,7 +305,7 @@ namespace SingleReaderTest
                     {
                         transformAndStore(epc);
                     }
-                    else if(epc[9] == '0')//0 stands for book code
+                    else if (epc[9] == '0')//0 stands for book code
                     {
                         convertBookLayer(epc);
                     }
@@ -385,6 +385,7 @@ namespace SingleReaderTest
             }
             return false;
         }
+
         #region class types of json response
         public class Book
         {
@@ -474,7 +475,7 @@ namespace SingleReaderTest
                 }
             }
 
-            if(flag == false)
+            if (flag == false)
             {
                 try
                 {
@@ -526,7 +527,7 @@ namespace SingleReaderTest
             try
             {
                 MySqlCommand storeLayerInfo = new MySqlCommand("INSERT INTO book (barcode, title, callNo, isbn) VALUES ('"
-                        + barcode + "','" +  title + "','" + callNo + "','" + isbn + "')", mycon);
+                        + barcode + "','" + title + "','" + callNo + "','" + isbn + "')", mycon);
                 storeLayerInfo.ExecuteNonQuery();
             }
             catch (Exception ee)
@@ -590,6 +591,7 @@ namespace SingleReaderTest
                 InsertBookInfo(barcode, layercode);
             }
         }
+
         private void InsertBookInfo(String barcode, String layercode)//store both book's barcode and layercode
         {
             MessageBox.Show(barcode + " belongs to " + layercode);
@@ -605,6 +607,79 @@ namespace SingleReaderTest
             {
                 MessageBox.Show(ee.Message);
             }
+        }
+
+
+        //judge if the book is missing from one shelf
+        private void compareBook()
+        {
+            MySqlDataAdapter layerInfo = new MySqlDataAdapter("SELECT barcode FROM book", mycon);//use barcode from the result of post application of a layer
+            MySqlDataAdapter bookInfo = new MySqlDataAdapter("SELECT barcode FROM bookread", mycon);//use barcode from one book
+
+            DataTable dtLayer = new DataTable();
+            DataTable dtBook = new DataTable();
+
+            layerInfo.Fill(dtLayer);
+            bookInfo.Fill(dtBook);
+
+            bool isLost = true;
+            string resultBook = " ";//unique barcode from the book 
+            string resultLayer = " ";//total barcode from one shelf
+            string resultLoss = " ";
+
+            //compare barcode to find if loss book from the shelf
+            foreach(DataRow layer in dtLayer.Rows)
+            {
+                resultLayer = layer["barcode"].ToString();
+                foreach(DataRow book in dtBook.Rows)
+                {
+                    resultBook = book["barcode"].ToString();
+                    if (resultBook.Equals(resultBook))
+                    {
+                        isLost = false;
+                        break;
+                    }
+                }
+
+                if(isLost == true)
+                {
+                    resultLoss = layer["barcode"].ToString();
+                    if(whetherCompareResultInDB(resultLoss) == false)
+                    {
+                        try
+                        {
+                            //compareBook database is not created
+                            string storeReport = "insert into compareBook (barcode) VALUES ('" + resultLoss + "')";
+                            MySqlCommand store = new MySqlCommand(storeReport, mycon);
+                            store.ExecuteNonQuery();
+                            store.Dispose();
+                        }
+                        catch
+                        {
+                            MessageBox.Show("Store compare result error");
+                        }
+                    }
+                }
+            }
+
+        }
+
+        private bool whetherCompareResultInDB(string barcode)
+        {
+            //compare barcode to find if loss book from the shelf
+            MySqlDataAdapter mysda = new MySqlDataAdapter("SELECT * FROM compareBook", mycon);
+            DataTable dt = new DataTable();
+            mysda.Fill(dt);
+            string result = " ";
+            foreach (DataRow book in dt.Rows)
+            {
+                result = book["barcode"].ToString();
+                if (result.Equals(barcode))
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         private void compare()
