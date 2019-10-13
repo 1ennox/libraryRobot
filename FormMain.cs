@@ -469,7 +469,6 @@ namespace SingleReaderTest
                         + libCode + "','" + level + "','" + room + "','" + shelf + "','" + column + "','" + tier + "','" + layerCode + "')", mycon);
                     store.ExecuteNonQuery();
                     mycon.Close();
-                    MessageBox.Show(layerCode);
                 }
                 catch (Exception ex)
                 {
@@ -633,6 +632,7 @@ namespace SingleReaderTest
             string resultBook = " ";//unique barcode from the book 
             string resultLayer = " ";//total barcode from one shelf
             string resultLoss = " ";
+            string title = " ";
 
             //compare barcode to find if loss book from the shelf
             foreach(DataRow layer in dtLayer.Rows)
@@ -655,9 +655,17 @@ namespace SingleReaderTest
                     {
                         try
                         {
-                            //compareBarcode database is not created
-                            string storeReport = "insert into compareBarcode (barcode) VALUES ('" + resultLoss + "')";
+                            mycon.Open();
+                            SqlCommand fetchTitle = new SqlCommand("SELECT title FROM book WHERE barcode = '" + resultLoss + "'");
+                            SqlDataReader dataRead = fetchTitle.ExecuteReader();
+                            while (dataRead.Read())
+                            {
+                                MessageBox.Show("doing sth");
+                                title = dataRead["title"].ToString();
+                            }
+                            string storeReport = "insert into compareBarcode (barcode, title) VALUES ('" + resultLoss + "','" + title +"')";
                             MySqlCommand store = new MySqlCommand(storeReport, mycon);
+                            mycon.Close();
                             store.ExecuteNonQuery();
                             store.Dispose();
                         }
@@ -703,9 +711,17 @@ namespace SingleReaderTest
                         {
                             try
                             {
+                                mycon.Open();
+                                SqlCommand fetchTitle2 = new SqlCommand("SELECT title FROM book WHERE barcode = '" + resultLoss + "'");
+                                SqlDataReader dataRead2 = fetchTitle2.ExecuteReader();
+                                while (dataRead2.Read())
+                                {
+                                    title = dataRead2["title"].ToString();
+                                }
                                 //compareLayercode database is not created
-                                string storeReport2 = "insert into compareLayercode (layercode) VALUES ('" + resultMore + "')";
+                                string storeReport2 = "insert into compareLayercode (layercode) VALUES ('" + resultLoss + "','" + title + "')";
                                 MySqlCommand store = new MySqlCommand(storeReport2, mycon);
+                                mycon.Close();
                                 store.ExecuteNonQuery();
                                 store.Dispose();
                             }
@@ -922,25 +938,31 @@ namespace SingleReaderTest
                     lblMsg.Text = "Reading tags...";
                 }
             }
+
             
-            while(timeCount < 3)
-            {
-                time_period();
-            }
+            time_period();
+
         }
         
         private void timer_Tick(object sender, EventArgs e)
         {
             //this.timer.Enabled = false;
+            if(timeCount < 3)
+            {
+                //MessageBox.Show("Report Generaged");
+                timeCount++;
+            }
+            MessageBox.Show("Comparing...");
             compareBook();
-            MessageBox.Show("Time out");
-            timeCount++;
+            
+            
+            //timeCount++;
         }
 
         private void time_period()
         {
             timer = new System.Timers.Timer();
-            timer.Interval = 15000;
+            timer.Interval = 3000;
             timer.Elapsed += new System.Timers.ElapsedEventHandler(timer_Tick);
             timer.Enabled = true;
         }
