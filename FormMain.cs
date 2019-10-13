@@ -446,6 +446,7 @@ namespace SingleReaderTest
             DataTable dt = new DataTable();
             string result = " ";
             bool flag = false;
+            string isbn = " ";
 
             mysda.Fill(dt);
             foreach (DataRow layer in dt.Rows)//if the layer code has already been stored into database, skip the process
@@ -486,7 +487,8 @@ namespace SingleReaderTest
                     req.ContentType = "application/json";
                     //keyword
                     //byte[] data = Encoding.UTF8.GetBytes("{\"number\": \"01010100200401\"}");
-                    byte[] data = Encoding.UTF8.GetBytes("{\"number\": \" " + layerCode + "\"}");
+                    //byte[] data = Encoding.UTF8.GetBytes("{\"number\": \" " + layerCode + "\"}");
+                    byte[] data = Encoding.UTF8.GetBytes("{\"number\": \"01020201800502\"}");
                     req.ContentLength = data.Length;
                     using (Stream reqStream = req.GetRequestStream())
                     {
@@ -505,21 +507,27 @@ namespace SingleReaderTest
                 {
                     MessageBox.Show(ex.ToString());
                 }
-
-                //Transform JObject to JArray
-                JObject @object = (JObject)JsonConvert.DeserializeObject(result);
-                JArray dataBack = (JArray)@object["data"]["book"];
-                for (int i = 0; i < dataBack.Count; i++)
+                try
                 {
-                    JObject item = (JObject)dataBack[i];
-                    string barcode = (string)item["barcode"];
-                    string title = (string)item["title"];
-                    string callNo = (string)item["callNo"];
-                    string isbn = (string)item["isbn"];
+                    //Transform JObject to JArray
+                    JObject @object = (JObject)JsonConvert.DeserializeObject(result);
+                    JArray dataBack = (JArray)@object["data"]["book"];
+                    for (int i = 0; i < dataBack.Count; i++)
+                    {
+                        JObject item = (JObject)dataBack[i];
+                        string barcode = (string)item["barcode"];
+                        string title = (string)item["title"];
+                        string callNo = (string)item["callNo"];
+                        isbn = (string)item["isbn"];
 
-                    //store in database
-                    InsertLayerInfo(barcode, title, callNo, isbn);
+                        //store in database
+                        InsertLayerInfo(barcode, title, callNo, isbn);
+                    }
                 }
+                catch (Exception ex){
+                    MessageBox.Show(ex.Message);
+                }
+                
             }
         }
 
@@ -660,12 +668,9 @@ namespace SingleReaderTest
                             {
                                 title = dr["title"].ToString();
                             }
-                            mycon.Open();
                             string storeReport = "INSERT INTO compareBarcode (barcode, title) VALUES ('" + resultLoss + "','" + title + "')";
                             MySqlCommand store = new MySqlCommand(storeReport, mycon);
                             store.ExecuteNonQuery();
-                            mycon.Close();
-                            //store.Dispose();
 
                         }
                         catch(Exception ex)
@@ -944,8 +949,6 @@ namespace SingleReaderTest
                     lblMsg.Text = "Reading tags...";
                 }
             }
-
-
             time_period();
 
         }
@@ -958,7 +961,7 @@ namespace SingleReaderTest
                 //MessageBox.Show("Report Generaged");
                 timeCount++;
                 compareBarCode();
-                MessageBox.Show("Comparing...");
+                //MessageBox.Show("Comparing...");
             }
             else
             {
@@ -969,7 +972,7 @@ namespace SingleReaderTest
         private void time_period()
         {
             timer = new System.Timers.Timer();
-            timer.Interval = 5000;
+            timer.Interval = 20000;
             timer.Elapsed += new System.Timers.ElapsedEventHandler(timer_Tick);
             timer.Enabled = true;
         }
