@@ -43,7 +43,7 @@ namespace SingleReaderTest
 
         public FormMain()
         {
-
+            mycon.Open();
             InitializeComponent();
 
             //traversing all possible serial ports, use the first one
@@ -157,6 +157,7 @@ namespace SingleReaderTest
         private void FormMain_FormClosing(object sender, FormClosingEventArgs e)
         {
             btnStop_Click(sender, e);
+            mycon.Close();
             Environment.Exit(Environment.ExitCode);
         }
 
@@ -464,11 +465,9 @@ namespace SingleReaderTest
             {
                 try
                 {
-                    mycon.Open();
                     MySqlCommand store = new MySqlCommand("INSERT INTO layer (LibraryCode, Level, RoomNumber, Shelf, ColumnNumber, Tier, LayerCode) VALUES ('"
                         + libCode + "','" + level + "','" + room + "','" + shelf + "','" + column + "','" + tier + "','" + layerCode + "')", mycon);
                     store.ExecuteNonQuery();
-                    mycon.Close();
                 }
                 catch (Exception ex)
                 {
@@ -528,11 +527,9 @@ namespace SingleReaderTest
         {
             try
             {
-                mycon.Open();
                 MySqlCommand storeLayerInfo = new MySqlCommand("INSERT INTO book (barcode, title, callNo, isbn) VALUES ('"
                         + barcode + "','" + title + "','" + callNo + "','" + isbn + "')", mycon);
                 storeLayerInfo.ExecuteNonQuery();
-                mycon.Close();
             }
             catch (Exception ee)
             {
@@ -605,11 +602,9 @@ namespace SingleReaderTest
         {
             try
             {
-                mycon.Open();
                 MySqlCommand storeLayerInfo = new MySqlCommand("INSERT INTO bookread (barCode, layerCode) VALUES ('"
                         + barcode + "','" + layercode + "')", mycon);
                 storeLayerInfo.ExecuteNonQuery();
-                mycon.Close();
             }
             catch (Exception ee)
             {
@@ -658,23 +653,24 @@ namespace SingleReaderTest
                     {
                         try
                         {
-                            //MySqlDataAdapter fetchTitle = new MySqlDataAdapter("SELECT title FROM book WHERE barcode = '" + resultLoss + "'", mycon);
-                            //DataTable dtTitle = new DataTable();
-                            //fetchTitle.Fill(dtTitle);
-                            //foreach(DataRow dr in dtTitle.Rows)
-                            //{
-                            //    title = dr["title"].ToString();
-                            //}
-                            lostBookName = layer["title"].ToString();
-                            MessageBox.Show(title);
-                            string storeReport = "INSERT INTO compareBarcode (barcode, title) VALUES ('" + resultLoss + "','" + lostBookName + "')";
+                            MySqlDataAdapter fetchTitle = new MySqlDataAdapter("SELECT title FROM book WHERE barcode = '" + resultLoss + "'", mycon);
+                            DataTable dtTitle = new DataTable();
+                            fetchTitle.Fill(dtTitle);
+                            foreach (DataRow dr in dtTitle.Rows)
+                            {
+                                title = dr["title"].ToString();
+                            }
+                            mycon.Open();
+                            string storeReport = "INSERT INTO compareBarcode (barcode, title) VALUES ('" + resultLoss + "','" + title + "')";
                             MySqlCommand store = new MySqlCommand(storeReport, mycon);
                             store.ExecuteNonQuery();
-                            store.Dispose();
+                            mycon.Close();
+                            //store.Dispose();
+
                         }
-                        catch
+                        catch(Exception ex)
                         {
-                            MessageBox.Show("Store compare lost result error");
+                            MessageBox.Show(ex.Message);
                         }
                         
                     }
