@@ -472,7 +472,7 @@ namespace SingleReaderTest
                 }
                 catch (Exception ex)
                 {
-                    //MessageBox.Show(ex.Message);
+                    MessageBox.Show(ex.Message);
                     flag = true;
                 }
             }
@@ -528,9 +528,11 @@ namespace SingleReaderTest
         {
             try
             {
+                mycon.Open();
                 MySqlCommand storeLayerInfo = new MySqlCommand("INSERT INTO book (barcode, title, callNo, isbn) VALUES ('"
                         + barcode + "','" + title + "','" + callNo + "','" + isbn + "')", mycon);
                 storeLayerInfo.ExecuteNonQuery();
+                mycon.Close();
             }
             catch (Exception ee)
             {
@@ -633,6 +635,7 @@ namespace SingleReaderTest
             string resultLayer = " ";//total barcode from one shelf
             string resultLoss = " ";
             string title = " ";
+            string lostBookName = " ";
 
             //compare barcode to find if loss book from the shelf
             foreach (DataRow layer in dtLayer.Rows)
@@ -641,7 +644,7 @@ namespace SingleReaderTest
                 foreach (DataRow book in dtBook.Rows)
                 {
                     resultBook = book["barcode"].ToString();
-                    if (resultBook.Equals(resultLayer))
+                    if (resultLayer.Equals(resultBook))
                     {
                         isLost = false;
                         break;
@@ -655,17 +658,17 @@ namespace SingleReaderTest
                     {
                         try
                         {
-                            mycon.Open();
-                            SqlCommand fetchTitle = new SqlCommand("SELECT title FROM book WHERE barcode = '" + resultLoss + "'");
-                            SqlDataReader dataRead = fetchTitle.ExecuteReader();
-                            while (dataRead.Read())
-                            {
-                                MessageBox.Show("doing sth");
-                                title = dataRead["title"].ToString();
-                            }
-                            string storeReport = "insert into compareBarcode (barcode, title) VALUES ('" + resultLoss + "','" + title + "')";
+                            //MySqlDataAdapter fetchTitle = new MySqlDataAdapter("SELECT title FROM book WHERE barcode = '" + resultLoss + "'", mycon);
+                            //DataTable dtTitle = new DataTable();
+                            //fetchTitle.Fill(dtTitle);
+                            //foreach(DataRow dr in dtTitle.Rows)
+                            //{
+                            //    title = dr["title"].ToString();
+                            //}
+                            lostBookName = layer["title"].ToString();
+                            MessageBox.Show(title);
+                            string storeReport = "INSERT INTO compareBarcode (barcode, title) VALUES ('" + resultLoss + "','" + lostBookName + "')";
                             MySqlCommand store = new MySqlCommand(storeReport, mycon);
-                            mycon.Close();
                             store.ExecuteNonQuery();
                             store.Dispose();
                         }
@@ -673,8 +676,10 @@ namespace SingleReaderTest
                         {
                             MessageBox.Show("Store compare lost result error");
                         }
+                        
                     }
                 }
+                isLost = true;
             }
 
             
@@ -952,22 +957,23 @@ namespace SingleReaderTest
         private void timer_Tick(object sender, EventArgs e)
         {
             //this.timer.Enabled = false;
-            if (timeCount < 3)
+            if (timeCount < 1)
             {
                 //MessageBox.Show("Report Generaged");
                 timeCount++;
+                compareBarCode();
+                MessageBox.Show("Comparing...");
             }
-            MessageBox.Show("Comparing...");
-            compareBarCode();
-
-
-            //timeCount++;
+            else
+            {
+                timer.Enabled = false;
+            }
         }
 
         private void time_period()
         {
             timer = new System.Timers.Timer();
-            timer.Interval = 3000;
+            timer.Interval = 5000;
             timer.Elapsed += new System.Timers.ElapsedEventHandler(timer_Tick);
             timer.Enabled = true;
         }
