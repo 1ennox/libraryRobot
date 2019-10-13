@@ -40,7 +40,7 @@ namespace SingleReaderTest
         //timer control
         System.Timers.Timer timer = null;
         long timeCount = 0;
-        
+
         public FormMain()
         {
 
@@ -411,7 +411,7 @@ namespace SingleReaderTest
         {
             string temp;
             string layerCode = "01";
-            
+
             temp = epc.Substring(2, 4);
             int libCode = Convert.ToInt32(temp, 16);
             //the library code does not need to be added onto the layer code
@@ -438,7 +438,7 @@ namespace SingleReaderTest
             fetchLayerInfo(libCode, level, room, shelf, column, tier, layerCode);
             return layerCode;
         }
-         
+
         private void fetchLayerInfo(int libCode, int level, int room, int shelf, int column, int tier, string layerCode)
         {
             MySqlDataAdapter mysda = new MySqlDataAdapter("SELECT LayerCode FROM `layer` ", mycon);
@@ -598,7 +598,7 @@ namespace SingleReaderTest
                 InsertBookInfo(barcode, layercode);
             }
         }
-    
+
         private void InsertBookInfo(string barcode, String layercode)//store both book's barcode and layercode
         {
             try
@@ -616,8 +616,8 @@ namespace SingleReaderTest
         }
 
 
-        //compare book function
-        private void compareBook()
+        //compare book barcode 
+        private void compareBarCode()
         {
             //use bardode to find if any books is lost from the shelf
             MySqlDataAdapter barcodelayerInfo = new MySqlDataAdapter("SELECT barcode FROM book", mycon);//use barcode from the result of post application of a layer
@@ -635,10 +635,10 @@ namespace SingleReaderTest
             string title = " ";
 
             //compare barcode to find if loss book from the shelf
-            foreach(DataRow layer in dtLayer.Rows)
+            foreach (DataRow layer in dtLayer.Rows)
             {
                 resultLayer = layer["barcode"].ToString();
-                foreach(DataRow book in dtBook.Rows)
+                foreach (DataRow book in dtBook.Rows)
                 {
                     resultBook = book["barcode"].ToString();
                     if (resultBook.Equals(resultLayer))
@@ -648,10 +648,10 @@ namespace SingleReaderTest
                     }
                 }
 
-                if(isLost == true)
+                if (isLost == true)
                 {
                     resultLoss = layer["barcode"].ToString();
-                    if(barcodeResultInDB(resultLoss) == false)//whether barcode result is in database
+                    if (barcodeResultInDB(resultLoss) == false)//whether barcode result is in database
                     {
                         try
                         {
@@ -663,7 +663,7 @@ namespace SingleReaderTest
                                 MessageBox.Show("doing sth");
                                 title = dataRead["title"].ToString();
                             }
-                            string storeReport = "insert into compareBarcode (barcode, title) VALUES ('" + resultLoss + "','" + title +"')";
+                            string storeReport = "insert into compareBarcode (barcode, title) VALUES ('" + resultLoss + "','" + title + "')";
                             MySqlCommand store = new MySqlCommand(storeReport, mycon);
                             mycon.Close();
                             store.ExecuteNonQuery();
@@ -677,65 +677,70 @@ namespace SingleReaderTest
                 }
             }
 
-            //use layercode to find if any books exist in wrong shelf
-            MySqlDataAdapter layercodelayerInfo = new MySqlDataAdapter("SELECT layercode FROM book", mycon);
-            MySqlDataAdapter layercodeBookInfo = new MySqlDataAdapter("SELECT layercode FROM bookread", mycon);
-
-            DataTable dt2Layer = new DataTable();
-            DataTable dt2Book = new DataTable();
-
-            layercodeBookInfo.Fill(dt2Book);
-            layercodelayerInfo.Fill(dt2Layer);
-
-            bool isMore = true;
-            String resultMore = " ";
-            String layercodeLayer = " ";//layer code from layer
-            String layercodeBook = " ";//layer code from book
-
-            foreach(DataRow book in dt2Book.Rows)
-            {
-                layercodeLayer = book["layercode"].ToString();
-                foreach(DataRow layer in dt2Layer.Rows)
-                {
-                    layercodeBook = layer["layercode"].ToString();
-                    if (layercodeBook.Equals(layercodeLayer))
-                    {
-                        isMore = false;
-                        break;
-                    }
-
-                    if(isMore == true)
-                    {
-                        resultMore = book["layercode"].ToString();
-                        if (layercodeResultInDB(resultMore) == false)
-                        {
-                            try
-                            {
-                                mycon.Open();
-                                SqlCommand fetchTitle2 = new SqlCommand("SELECT title FROM book WHERE barcode = '" + resultLoss + "'");
-                                SqlDataReader dataRead2 = fetchTitle2.ExecuteReader();
-                                while (dataRead2.Read())
-                                {
-                                    title = dataRead2["title"].ToString();
-                                }
-                                //compareLayercode database is not created
-                                string storeReport2 = "insert into compareLayercode (layercode) VALUES ('" + resultLoss + "','" + title + "')";
-                                MySqlCommand store = new MySqlCommand(storeReport2, mycon);
-                                mycon.Close();
-                                store.ExecuteNonQuery();
-                                store.Dispose();
-                            }
-                            catch
-                            {
-                                MessageBox.Show("Store compare more result error");
-                            }
-                        }
-                    }
-                }
-            }
+            
 
         }
 
+        //private void compareLayerCode()
+        //{
+        //    //use layercode to find if any books exist in wrong shelf
+        //    MySqlDataAdapter layercodelayerInfo = new MySqlDataAdapter("SELECT layercode FROM book", mycon);
+        //    MySqlDataAdapter layercodeBookInfo = new MySqlDataAdapter("SELECT layercode FROM bookread", mycon);
+
+        //    DataTable dt2Layer = new DataTable();
+        //    DataTable dt2Book = new DataTable();
+
+        //    layercodeBookInfo.Fill(dt2Book);
+        //    layercodelayerInfo.Fill(dt2Layer);
+
+        //    bool isMore = true;
+        //    String resultMore = " ";
+        //    String layercodeLayer = " ";//layer code from layer
+        //    String layercodeBook = " ";//layer code from book
+        //    String title = " ";
+
+        //    foreach (DataRow book in dt2Book.Rows)
+        //    {
+        //        layercodeLayer = book["layercode"].ToString();
+        //        foreach (DataRow layer in dt2Layer.Rows)
+        //        {
+        //            layercodeBook = layer["layercode"].ToString();
+        //            if (layercodeBook.Equals(layercodeLayer))
+        //            {
+        //                isMore = false;
+        //                break;
+        //            }
+
+        //            if (isMore == true)
+        //            {
+        //                resultMore = book["layercode"].ToString();
+        //                if (layercodeResultInDB(resultMore) == false)
+        //                {
+        //                    try
+        //                    {
+        //                        mycon.Open();
+        //                        SqlCommand fetchTitle2 = new SqlCommand("SELECT title FROM book WHERE barcode = '" + resultLoss + "'");
+        //                        SqlDataReader dataRead2 = fetchTitle2.ExecuteReader();
+        //                        while (dataRead2.Read())
+        //                        {
+        //                            title = dataRead2["title"].ToString();
+        //                        }
+        //                        //compareLayercode database is not created
+        //                        string storeReport2 = "insert into compareLayercode (layercode) VALUES ('" + resultLoss + "','" + title + "')";
+        //                        MySqlCommand store = new MySqlCommand(storeReport2, mycon);
+        //                        mycon.Close();
+        //                        store.ExecuteNonQuery();
+        //                        store.Dispose();
+        //                    }
+        //                    catch
+        //                    {
+        //                        MessageBox.Show("Store compare more result error");
+        //                    }
+        //                }
+        //            }
+        //        }
+        //    }
+        //}
         //whether barcode result is in datadase 
         private bool barcodeResultInDB(string barcode)
         {
@@ -754,7 +759,7 @@ namespace SingleReaderTest
             }
             return false;
         }
-        
+
         //whether layercode result is in database
         private bool layercodeResultInDB(string layercode)
         {
@@ -939,23 +944,23 @@ namespace SingleReaderTest
                 }
             }
 
-            
+
             time_period();
 
         }
-        
+
         private void timer_Tick(object sender, EventArgs e)
         {
             //this.timer.Enabled = false;
-            if(timeCount < 3)
+            if (timeCount < 3)
             {
                 //MessageBox.Show("Report Generaged");
                 timeCount++;
             }
             MessageBox.Show("Comparing...");
-            compareBook();
-            
-            
+            compareBarCode();
+
+
             //timeCount++;
         }
 
@@ -966,7 +971,7 @@ namespace SingleReaderTest
             timer.Elapsed += new System.Timers.ElapsedEventHandler(timer_Tick);
             timer.Enabled = true;
         }
-        
+
         // 停止扫描
         private void btnStop_Click(object sender, EventArgs e)
         {
