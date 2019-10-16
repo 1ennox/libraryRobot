@@ -487,6 +487,8 @@ namespace SingleReaderTest
                     //keyword
                     //byte[] data = Encoding.UTF8.GetBytes("{\"number\": \"01010100200401\"}");
                     byte[] data = Encoding.UTF8.GetBytes("{\"number\": \" " + layerCode + "\"}");
+                    //byte[] data = Encoding.UTF8.GetBytes("{\"number\": \"01020201900202\"}");
+                    
                     req.ContentLength = data.Length;
                     using (Stream reqStream = req.GetRequestStream())
                     {
@@ -517,11 +519,11 @@ namespace SingleReaderTest
                         string barcode = (string)item["barcode"];
                         string title = (string)item["title"];
                         string callNo = (string)item["callNo"];
-                        //string isbn = (string)item["isbn"];
+                        string isbn = (string)item["isbn"];
 
                         //store in database
-                        //InsertLayerInfo(barcode, title, callNo, isbn);
-                        InsertLayerInfo(barcode, title, callNo);
+                        InsertLayerInfo(barcode, title, callNo, isbn);
+                        //InsertLayerInfo(barcode, callNo, isbn);
                     }
                 }
                 catch (Exception ex){
@@ -530,15 +532,16 @@ namespace SingleReaderTest
                 
             }
         }
-        //private void InsertLayerInfo(string barcode, string title, string callNo, string isbn)
-        private void InsertLayerInfo(string barcode, string title, string callNo)
+        private void InsertLayerInfo(string barcode, string title, string callNo, string isbn)
+        //private void InsertLayerInfo(string barcode, string callNo, string isbn)
         {
             try
             {
-                //MySqlCommand storeLayerInfo = new MySqlCommand("INSERT INTO book (barcode, title, callNo, isbn) VALUES ('"
-                        //+ barcode + "','" + title + "','" + callNo + "','" + isbn + "')", mycon);
-                MySqlCommand storeLayerInfo = new MySqlCommand("INSERT INTO 'book' (barCode, title, callNo) VALUES ('"
-                        + barcode + "','" + title + "','" + callNo + "')", mycon);
+                string t = "INSERT INTO `book` (barcode, title, callNo, isbn) VALUES ('" + barcode + "','" + title + "','" + callNo + "','" + isbn + "')";
+                MySqlCommand storeLayerInfo = new MySqlCommand(t, mycon);
+                MessageBox.Show(t);
+                //MySqlCommand storeLayerInfo = new MySqlCommand("INSERT INTO `book` (barCode, callNo, isbn) VALUES ('"
+                //        + barcode + "','" + callNo + "','" + isbn + "')", mycon);
                 storeLayerInfo.ExecuteNonQuery();
             }
             catch (Exception ee)
