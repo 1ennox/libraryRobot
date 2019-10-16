@@ -518,10 +518,11 @@ namespace SingleReaderTest
                         string barcode = (string)item["barcode"];
                         string title = (string)item["title"];
                         string callNo = (string)item["callNo"];
-                        isbn = (string)item["isbn"];
+                        //isbn = (string)item["isbn"];
 
                         //store in database
-                        InsertLayerInfo(barcode, title, callNo, isbn);
+                        //InsertLayerInfo(barcode, title, callNo, isbn);
+                        InsertLayerInfo(barcode, title, callNo);
                     }
                 }
                 catch (Exception ex){
@@ -530,13 +531,15 @@ namespace SingleReaderTest
                 
             }
         }
-
-        private void InsertLayerInfo(string barcode, string title, string callNo, string isbn)
+        //private void InsertLayerInfo(string barcode, string title, string callNo, string isbn)
+        private void InsertLayerInfo(string barcode, string title, string callNo)
         {
             try
             {
+                //MySqlCommand storeLayerInfo = new MySqlCommand("INSERT INTO book (barcode, title, callNo, isbn) VALUES ('"
+                        //+ barcode + "','" + title + "','" + callNo + "','" + isbn + "')", mycon);
                 MySqlCommand storeLayerInfo = new MySqlCommand("INSERT INTO book (barcode, title, callNo, isbn) VALUES ('"
-                        + barcode + "','" + title + "','" + callNo + "','" + isbn + "')", mycon);
+                        + barcode + "','" + title + "','" + callNo + "')", mycon);
                 storeLayerInfo.ExecuteNonQuery();
             }
             catch (Exception ee)
