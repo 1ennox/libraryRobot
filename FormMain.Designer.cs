@@ -54,6 +54,7 @@
             this.label5 = new System.Windows.Forms.Label();
             this.c = new System.Windows.Forms.Button();
             this.openStorageDB = new System.Windows.Forms.Button();
+            this.DBclear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
@@ -368,11 +369,22 @@
             this.openStorageDB.UseVisualStyleBackColor = true;
             this.openStorageDB.Click += new System.EventHandler(this.OpenStorageDB_Click);
             // 
+            // DBclear
+            // 
+            this.DBclear.Location = new System.Drawing.Point(866, 34);
+            this.DBclear.Name = "DBclear";
+            this.DBclear.Size = new System.Drawing.Size(88, 29);
+            this.DBclear.TabIndex = 41;
+            this.DBclear.Text = "Clear All DB";
+            this.DBclear.UseVisualStyleBackColor = true;
+            this.DBclear.Click += new System.EventHandler(this.DBclear_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1199, 654);
+            this.Controls.Add(this.DBclear);
             this.Controls.Add(this.openStorageDB);
             this.Controls.Add(this.c);
             this.Controls.Add(this.label5);
@@ -441,6 +453,7 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button c;
         private System.Windows.Forms.Button openStorageDB;
+        private System.Windows.Forms.Button DBclear;
     }
 }
 

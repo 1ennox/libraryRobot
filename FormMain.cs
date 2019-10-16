@@ -34,7 +34,7 @@ namespace SingleReaderTest
         bool isTryReconnNet = false;
         int tryReconnNetTimeSpan;
         //Database connection
-        MySqlConnection mycon = new MySqlConnection("Server=127.0.0.1;User Id=root;password=;Database=test");
+        MySqlConnection mycon = new MySqlConnection("Server=127.0.0.1;User Id=root;password=;Database=library");
         string tableName = " ";
         bool dbisConnect = false;
         //timer control
@@ -446,7 +446,6 @@ namespace SingleReaderTest
             DataTable dt = new DataTable();
             string result = " ";
             bool flag = false;
-            string isbn = " ";
 
             mysda.Fill(dt);
             foreach (DataRow layer in dt.Rows)//if the layer code has already been stored into database, skip the process
@@ -487,8 +486,7 @@ namespace SingleReaderTest
                     req.ContentType = "application/json";
                     //keyword
                     //byte[] data = Encoding.UTF8.GetBytes("{\"number\": \"01010100200401\"}");
-                    //byte[] data = Encoding.UTF8.GetBytes("{\"number\": \" " + layerCode + "\"}");
-                    byte[] data = Encoding.UTF8.GetBytes("{\"number\": \"01020201800502\"}");
+                    byte[] data = Encoding.UTF8.GetBytes("{\"number\": \" " + layerCode + "\"}");
                     req.ContentLength = data.Length;
                     using (Stream reqStream = req.GetRequestStream())
                     {
@@ -512,13 +510,14 @@ namespace SingleReaderTest
                     //Transform JObject to JArray
                     JObject @object = (JObject)JsonConvert.DeserializeObject(result);
                     JArray dataBack = (JArray)@object["data"]["book"];
+                    MessageBox.Show(dataBack.ToString());
                     for (int i = 0; i < dataBack.Count; i++)
                     {
                         JObject item = (JObject)dataBack[i];
                         string barcode = (string)item["barcode"];
                         string title = (string)item["title"];
                         string callNo = (string)item["callNo"];
-                        //isbn = (string)item["isbn"];
+                        //string isbn = (string)item["isbn"];
 
                         //store in database
                         //InsertLayerInfo(barcode, title, callNo, isbn);
@@ -538,7 +537,7 @@ namespace SingleReaderTest
             {
                 //MySqlCommand storeLayerInfo = new MySqlCommand("INSERT INTO book (barcode, title, callNo, isbn) VALUES ('"
                         //+ barcode + "','" + title + "','" + callNo + "','" + isbn + "')", mycon);
-                MySqlCommand storeLayerInfo = new MySqlCommand("INSERT INTO book (barcode, title, callNo, isbn) VALUES ('"
+                MySqlCommand storeLayerInfo = new MySqlCommand("INSERT INTO 'book' (barCode, title, callNo) VALUES ('"
                         + barcode + "','" + title + "','" + callNo + "')", mycon);
                 storeLayerInfo.ExecuteNonQuery();
             }
@@ -867,6 +866,7 @@ namespace SingleReaderTest
                     btnDisconn.Enabled = true;
                     btnScan.Enabled = true;
                     btnStop.Enabled = false;
+                    DBclear.Enabled = true;
                     //MI_ScanConfig.Enabled = true;
                     //MI_ReaderConfig.Enabled = true;
                     //MI_GPIO.Enabled = true;
@@ -913,6 +913,7 @@ namespace SingleReaderTest
                     btnDisconn.Enabled = true;
                     btnScan.Enabled = false;
                     btnStop.Enabled = true;
+                    DBclear.Enabled = false;
                     //MI_ScanConfig.Enabled = false;
                     //MI_ReaderConfig.Enabled = false;
                     //MI_GPIO.Enabled = false;
@@ -963,7 +964,7 @@ namespace SingleReaderTest
             {
                 //MessageBox.Show("Report Generaged");
                 timeCount++;
-                compareBarCode();
+                //compareBarCode();
                 //MessageBox.Show("Comparing...");
             }
             else
@@ -975,7 +976,7 @@ namespace SingleReaderTest
         private void time_period()
         {
             timer = new System.Timers.Timer();
-            timer.Interval = 20000;
+            timer.Interval = 15000;
             timer.Elapsed += new System.Timers.ElapsedEventHandler(timer_Tick);
             timer.Enabled = true;
         }
@@ -1121,9 +1122,10 @@ namespace SingleReaderTest
 
         private void BtnExecute_Click(object sender, EventArgs e)
         {
-            compare();
-            compareReport detailReportform = new compareReport();
-            detailReportform.ShowDialog();
+            compareBarCode();
+            //compare();
+            //compareReport detailReportform = new compareReport();
+            //detailReportform.ShowDialog();
         }
 
         private void OpenStorageDB_Click(object sender, EventArgs e)
@@ -1134,6 +1136,20 @@ namespace SingleReaderTest
 
         private void FormMain_Load(object sender, EventArgs e)
         {
+
+        }
+
+        private void DBclear_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Do you really want to clear all data in database?", "warning", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                MySqlCommand delete = new MySqlCommand("truncate table layer; truncate table book; truncate table bookread; truncate table comparebarcode;", mycon);
+                delete.ExecuteNonQuery();
+            }
+            else
+            {
+                return;
+            }
 
         }
     }
