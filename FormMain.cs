@@ -667,7 +667,7 @@ namespace SingleReaderTest
                             {
                                 title = dr["title"].ToString();
                             }
-                            string storeReport = "INSERT INTO compareBarcode (barcode, title) VALUES ('" + resultLoss + "','" + title + "')";
+                            string storeReport = "INSERT INTO compareBarcode (barcode, title) VALUES ('" + resultLoss + "',\"" + title + "\")";
                             MySqlCommand store = new MySqlCommand(storeReport, mycon);
                             store.ExecuteNonQuery();
 
@@ -1121,8 +1121,8 @@ namespace SingleReaderTest
         {
             compareBarCode();
             //compare();
-            //compareReport detailReportform = new compareReport();
-            //detailReportform.ShowDialog();
+            compareReport detailReportform = new compareReport();
+            detailReportform.ShowDialog();
         }
 
         private void OpenStorageDB_Click(object sender, EventArgs e)
