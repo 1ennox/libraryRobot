@@ -690,7 +690,7 @@ namespace SingleReaderTest
         {
             //use layercode to find if any books exist in wrong shelf
             MySqlDataAdapter layercodelayerInfo = new MySqlDataAdapter("SELECT layercode FROM layer", mycon);
-            MySqlDataAdapter layercodeBookInfo = new MySqlDataAdapter("SELECT layercode FROM bookread", mycon);//sanner read book
+            MySqlDataAdapter layercodeBookInfo = new MySqlDataAdapter("SELECT * FROM bookread", mycon);//sanner read book
 
             DataTable dt2Layer = new DataTable();
             DataTable dt2Book = new DataTable();
@@ -703,10 +703,13 @@ namespace SingleReaderTest
             String layercodeLayer = " ";//layer code from layer
             String layercodeBook = " ";//layer code from book
             String title = " ";
+            String resultBarcode = " ";
+
 
             foreach (DataRow book in dt2Book.Rows)
             {
                 layercodeLayer = book["layercode"].ToString();
+                resultBarcode = book["barcode"].ToString();
                 foreach (DataRow layer in dt2Layer.Rows)
                 {
                     layercodeBook = layer["layercode"].ToString();
@@ -730,13 +733,13 @@ namespace SingleReaderTest
                                 {
                                     title = dr["title"].ToString();
                                 }
-                                string storeReport = "INSERT INTO compareLayercode (barcode, title) VALUES ('" + resultMore + "',\"" + title + "\")";
+                                string storeReport = "INSERT INTO compareLayercode (layercode, title) VALUES ('" + resultBarcode + "','" + title + "')";
                                 MySqlCommand store = new MySqlCommand(storeReport, mycon);
                                 store.ExecuteNonQuery();
                             }
-                            catch(Exception ex)
+                            catch
                             {
-                                MessageBox.Show(ex.Message);
+                                MessageBox.Show("Store compare more result error");
                             }
                         }
                     }
