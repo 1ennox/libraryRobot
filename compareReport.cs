@@ -22,13 +22,20 @@ namespace SingleReaderTest
         public void newFetchData()
         {
             MySqlDataAdapter getMissingBook = new MySqlDataAdapter("SELECT * FROM comparebarcode", myconn);
-            //MySqlDataAdapter mysda = new MySqlDataAdapter("SELECT * FROM comparebarcode", myconn);
-            DataSet ds = new DataSet();
-            getMissingBook.Fill(ds, "missingBook");
-            dataGridView1.DataSource = ds.Tables["missingBook"];
+            MySqlDataAdapter getWrongBook = new MySqlDataAdapter("SELECT * FROM comparelayercode", myconn);
+            DataSet ds1 = new DataSet();
+            getMissingBook.Fill(ds1, "missingBook");
+            dataGridView1.DataSource = ds1.Tables["missingBook"];
             dataGridView1.Columns[0].HeaderText = "barcode";
             dataGridView1.Columns[1].HeaderText = "title";
             getMissingBook.Dispose();
+
+            DataSet ds2 = new DataSet();
+            getWrongBook.Fill(ds2, "wrongBook");
+            dataGridView2.DataSource = ds2.Tables["wrongBook"];
+            dataGridView2.Columns[0].HeaderText = "barcode";
+            dataGridView2.Columns[1].HeaderText = "title";
+            getWrongBook.Dispose();
             myconn.Close();
         }
 

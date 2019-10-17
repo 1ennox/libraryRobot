@@ -486,8 +486,8 @@ namespace SingleReaderTest
                     req.ContentType = "application/json";
                     //keyword
                     //byte[] data = Encoding.UTF8.GetBytes("{\"number\": \"01010100200401\"}");
-                    //byte[] data = Encoding.UTF8.GetBytes("{\"number\": \" " + layerCode + "\"}");
-                    byte[] data = Encoding.UTF8.GetBytes("{\"number\": \"01020201900202\"}");
+                    byte[] data = Encoding.UTF8.GetBytes("{\"number\": \" " + layerCode + "\"}");
+                    //byte[] data = Encoding.UTF8.GetBytes("{\"number\": \"01020201900202\"}");
                     
                     req.ContentLength = data.Length;
                     using (Stream reqStream = req.GetRequestStream())
@@ -689,7 +689,7 @@ namespace SingleReaderTest
         private void compareLayerCode()
         {
             //use layercode to find if any books exist in wrong shelf
-            MySqlDataAdapter layercodelayerInfo = new MySqlDataAdapter("SELECT layercode FROM book", mycon);
+            MySqlDataAdapter layercodelayerInfo = new MySqlDataAdapter("SELECT layercode FROM layer", mycon);
             MySqlDataAdapter layercodeBookInfo = new MySqlDataAdapter("SELECT layercode FROM bookread", mycon);//sanner read book
 
             DataTable dt2Layer = new DataTable();
@@ -730,13 +730,13 @@ namespace SingleReaderTest
                                 {
                                     title = dr["title"].ToString();
                                 }
-                                string storeReport = "INSERT INTO compareLayercode (layercode, title) VALUES ('" + resultMore + "','" + title + "')";
+                                string storeReport = "INSERT INTO compareLayercode (barcode, title) VALUES ('" + resultMore + "',\"" + title + "\")";
                                 MySqlCommand store = new MySqlCommand(storeReport, mycon);
                                 store.ExecuteNonQuery();
                             }
-                            catch
+                            catch(Exception ex)
                             {
-                                MessageBox.Show("Store compare more result error");
+                                MessageBox.Show(ex.Message);
                             }
                         }
                     }
@@ -960,8 +960,8 @@ namespace SingleReaderTest
             {
                 //MessageBox.Show("Report Generaged");
                 timeCount++;
-                compareBarCode();
-                compareLayerCode();
+                //compareBarCode();
+                //compareLayerCode();
                 //MessageBox.Show("Comparing...");
             }
             else
@@ -1120,6 +1120,7 @@ namespace SingleReaderTest
         private void BtnExecute_Click(object sender, EventArgs e)
         {
             compareBarCode();
+            //compareLayerCode();
             //compare();
             compareReport detailReportform = new compareReport();
             detailReportform.ShowDialog();
