@@ -689,7 +689,7 @@ namespace SingleReaderTest
         private void compareLayerCode()
         {
             //use layercode to find if any books exist in wrong shelf
-            MySqlDataAdapter layercodelayerInfo = new MySqlDataAdapter("SELECT layercode FROM layer", mycon);
+            MySqlDataAdapter layercodelayerInfo = new MySqlDataAdapter("SELECT layerCode FROM layer", mycon);
             MySqlDataAdapter layercodeBookInfo = new MySqlDataAdapter("SELECT * FROM bookread", mycon);//sanner read book
 
             DataTable dt2Layer = new DataTable();
@@ -708,11 +708,11 @@ namespace SingleReaderTest
 
             foreach (DataRow book in dt2Book.Rows)
             {
-                layercodeLayer = book["layercode"].ToString();
-                resultBarcode = book["barcode"].ToString();
+                layercodeLayer = book["layerCode"].ToString();
+                resultBarcode = book["barCode"].ToString();
                 foreach (DataRow layer in dt2Layer.Rows)
                 {
-                    layercodeBook = layer["layercode"].ToString();
+                    layercodeBook = layer["layerCode"].ToString();
                     if (layercodeBook.Equals(layercodeLayer))
                     {
                         isMore = false;
@@ -721,7 +721,7 @@ namespace SingleReaderTest
 
                     if (isMore == true)
                     {
-                        resultMore = book["layercode"].ToString();
+                        resultMore = book["layerCode"].ToString();
                         if (layercodeResultInDB(resultMore) == false)
                         {
                             try
@@ -733,7 +733,7 @@ namespace SingleReaderTest
                                 {
                                     title = dr["title"].ToString();
                                 }
-                                string storeReport = "INSERT INTO compareLayercode (barcode, title) VALUES ('" + resultBarcode + "',\"" + title + "\")";
+                                string storeReport = "INSERT INTO compareLayercode (barCode, title) VALUES ('" + resultBarcode + "',\"" + title + "\")";
                                 MySqlCommand store = new MySqlCommand(storeReport, mycon);
                                 store.ExecuteNonQuery();
                             }
@@ -1122,8 +1122,15 @@ namespace SingleReaderTest
 
         private void BtnExecute_Click(object sender, EventArgs e)
         {
-            compareBarCode();
-            compareLayerCode();
+            try
+            {
+                compareBarCode();
+                compareLayerCode();
+            }
+            catch(Exception ex)
+            {
+                //MessageBox.Show(ex.Message);
+            }
             //compare();
             compareReport detailReportform = new compareReport();
             detailReportform.ShowDialog();
@@ -1144,7 +1151,7 @@ namespace SingleReaderTest
         {
             if (MessageBox.Show("Do you really want to clear all data in database?", "warning", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                MySqlCommand delete = new MySqlCommand("truncate table layer; truncate table book; truncate table bookread; truncate table comparebarcode;", mycon);
+                MySqlCommand delete = new MySqlCommand("truncate table layer; truncate table book; truncate table bookread; truncate table comparebarcode; truncate table comparelayercode;", mycon);
                 delete.ExecuteNonQuery();
             }
             else
