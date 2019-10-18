@@ -733,7 +733,7 @@ namespace SingleReaderTest
                                 {
                                     title = dr["title"].ToString();
                                 }
-                                string storeReport = "INSERT INTO compareLayercode (layercode, title) VALUES ('" + resultBarcode + "','" + title + "')";
+                                string storeReport = "INSERT INTO compareLayercode (barcode, title) VALUES ('" + resultBarcode + "',\"" + title + "\")";
                                 MySqlCommand store = new MySqlCommand(storeReport, mycon);
                                 store.ExecuteNonQuery();
                             }
@@ -1123,7 +1123,7 @@ namespace SingleReaderTest
         private void BtnExecute_Click(object sender, EventArgs e)
         {
             compareBarCode();
-            //compareLayerCode();
+            compareLayerCode();
             //compare();
             compareReport detailReportform = new compareReport();
             detailReportform.ShowDialog();
