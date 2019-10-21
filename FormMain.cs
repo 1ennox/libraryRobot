@@ -35,8 +35,6 @@ namespace SingleReaderTest
         int tryReconnNetTimeSpan;
         //Database connection
         MySqlConnection mycon = new MySqlConnection("Server=127.0.0.1;User Id=root;password=;Database=library");
-        string tableName = " ";
-        bool dbisConnect = false;
         //timer control
         System.Timers.Timer timer = null;
         long timeCount = 0;
@@ -300,84 +298,10 @@ namespace SingleReaderTest
                         barcode = convertBookLayer(epc);
                         mydr["barcode"] = barcode;
                     }
-                    //else if (dbisConnect == true && epc[9] != '2')
-                    //{
-                    //    String temp = mydr["count"].ToString();
-                    //    int.TryParse(temp, out count);
-                    //    insertToDB(epc, 1);
-                    //}
                 }
             }
         }
         #endregion
-
-        //Testfunction could delete from line 315 to 380
-        //private void insertToDB(String epc, int count)
-        //{
-        //    if (whetherInDB(epc) == true)//if this book has already been put into database, then update its count value
-        //    {
-        //        updateToDB(epc, count);
-        //    }
-        //    else
-        //    {
-        //        MySqlCommand mycom = new MySqlCommand("INSERT INTO " + tableName + " (EPC, count) VALUES('" + epc + "','" + count + "')", mycon);
-        //        try
-        //        {
-        //            mycom.ExecuteNonQuery();
-        //        }
-        //        catch
-        //        {
-        //            MessageBox.Show("Insert error!");
-        //        }
-        //    }
-        //}
-
-        //private void updateToDB(String epc, int count)
-        //{
-        //    MySqlCommand mycom = new MySqlCommand("UPDATE " + tableName + " SET count = '" + count + "' WHERE EPC = '" + epc + "'", mycon);
-        //    try
-        //    {
-        //        mycom.ExecuteNonQuery();
-        //    }
-        //    catch
-        //    {
-        //        MessageBox.Show("Update error!");
-        //    }
-        //}
-
-        //private bool whetherInDB(string epc)
-        //{
-        //    MySqlDataAdapter mysda = new MySqlDataAdapter("SELECT EPC FROM " + tableName, mycon);
-        //    DataTable dt = new DataTable();
-        //    mysda.Fill(dt);
-        //    string result = " ";
-        //    foreach (DataRow book in dt.Rows)
-        //    {
-        //        result = book["EPC"].ToString();
-        //        if (result.Equals(epc))
-        //        {
-        //            return true;
-        //        }
-        //    }
-        //    return false;
-        //}
-
-        //private bool whetherResultInDB(string epc)
-        //{
-        //    MySqlDataAdapter mysda = new MySqlDataAdapter("SELECT * FROM compareResult", mycon);
-        //    DataTable dt = new DataTable();
-        //    mysda.Fill(dt);
-        //    string result = " ";
-        //    foreach (DataRow book in dt.Rows)
-        //    {
-        //        result = book["EPC"].ToString();
-        //        if (result.Equals(epc))
-        //        {
-        //            return true;
-        //        }
-        //    }
-        //    return false;
-        //}
 
         #region class types of json response
         public class Book
@@ -746,7 +670,7 @@ namespace SingleReaderTest
                             }
                             catch
                             {
-                                MessageBox.Show("Store compare more result error");
+                                //MessageBox.Show("Store compare more result error");
                             }
                         }
                     }
@@ -887,34 +811,6 @@ namespace SingleReaderTest
                     //MI_ReaderConfig.Enabled = false;
                     //MI_GPIO.Enabled = false;
                     break;
-                case "dbconn":
-                    btnDBConn.Enabled = false;
-                    btnDBDisconn.Enabled = true;
-                    storageDBConnect.Enabled = false;
-                    storageDBDisConnect.Enabled = false;
-                    c.Enabled = false;
-                    break;
-                case "dbdisconn":
-                    btnDBConn.Enabled = true;
-                    btnDBDisconn.Enabled = false;
-                    storageDBConnect.Enabled = true;
-                    storageDBDisConnect.Enabled = false;
-                    c.Enabled = true;
-                    break;
-                case "storagedbconn":
-                    btnDBConn.Enabled = false;
-                    btnDBDisconn.Enabled = false;
-                    storageDBConnect.Enabled = false;
-                    storageDBDisConnect.Enabled = true;
-                    c.Enabled = false;
-                    break;
-                case "storagedbdisconn":
-                    btnDBConn.Enabled = true;
-                    btnDBDisconn.Enabled = false;
-                    storageDBConnect.Enabled = true;
-                    storageDBDisConnect.Enabled = false;
-                    c.Enabled = true;
-                    break;
                 case "scan":
                     btnConn.Enabled = false;
                     btnDisconn.Enabled = true;
@@ -968,13 +864,15 @@ namespace SingleReaderTest
         private void timer_Tick(object sender, EventArgs e)
         {
             //this.timer.Enabled = false;
-            if (timeCount < 1)
+            if (timeCount < 3)
             {
                 //MessageBox.Show("Report Generaged");
                 timeCount++;
-                //compareBarCode();
-                //compareLayerCode();
-                //MessageBox.Show("Comparing...");
+                compareBarCode();
+                compareLayerCode();
+                MessageBox.Show("Comparing...");
+                MySqlCommand delete = new MySqlCommand("truncate table layer; truncate table book; truncate table bookread;", mycon);
+                delete.ExecuteNonQuery();
             }
             else
             {
@@ -985,7 +883,7 @@ namespace SingleReaderTest
         private void time_period()
         {
             timer = new System.Timers.Timer();
-            timer.Interval = 15000;
+            timer.Interval = 13000;
             timer.Elapsed += new System.Timers.ElapsedEventHandler(timer_Tick);
             timer.Enabled = true;
         }
@@ -1058,40 +956,6 @@ namespace SingleReaderTest
 
         }
 
-        private void btnDBConn_Click(object sender, EventArgs e)
-        {
-            //con.ConnectionString = 
-            //    "server=192.168.111.231;database=ZHUICLibDBnew;user=lrcreadyonly;pwd=sql@lrc2019.15";
-            mycon.Open();
-            tableName = " testlibraryreader ";
-            dbisConnect = true;
-            changeCtrlEnable("dbconn");
-        }
-
-        private void btnDBDisconn_Click(object sender, EventArgs e)
-        {
-            //con.ConnectionString = 
-            //    "server=192.168.111.231;database=ZHUICLibDBnew;user=lrcreadyonly;pwd=sql@lrc2019.15";
-            mycon.Close();
-            tableName = " ";
-            dbisConnect = false;
-            changeCtrlEnable("dbdisconn");
-        }
-        private void StorageDBConnect_Click(object sender, EventArgs e)
-        {
-            mycon.Open();
-            tableName = " totalStorage ";
-            dbisConnect = true;
-            changeCtrlEnable("storagedbconn");
-        }
-
-        private void StorageDBDisConnect_Click(object sender, EventArgs e)
-        {
-            mycon.Close();
-            tableName = " ";
-            dbisConnect = false;
-            changeCtrlEnable("storagedbdisconn");
-        }
         private void btnArmStop_Click(object sender, EventArgs e)//r
         {
 
@@ -1131,17 +995,10 @@ namespace SingleReaderTest
 
         private void BtnExecute_Click(object sender, EventArgs e)
         {
-            compareBarCode();
-            compareLayerCode();
-            //compare();
+            //compareBarCode();
+            //compareLayerCode();
             compareReport detailReportform = new compareReport();
             detailReportform.ShowDialog();
-        }
-
-        private void OpenStorageDB_Click(object sender, EventArgs e)
-        {
-            storageForm storage = new storageForm();
-            storage.ShowDialog();
         }
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -1153,7 +1010,7 @@ namespace SingleReaderTest
         {
             if (MessageBox.Show("Do you really want to clear all data in database?", "warning", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
-                MySqlCommand delete = new MySqlCommand("truncate table layer; truncate table book; truncate table bookread; truncate table comparebarcode;", mycon);
+                MySqlCommand delete = new MySqlCommand("truncate table layer; truncate table book; truncate table bookread; truncate table comparebarcode; truncate table comparelayercode;", mycon); 
                 delete.ExecuteNonQuery();
             }
             else
@@ -1161,6 +1018,14 @@ namespace SingleReaderTest
                 return;
             }
 
+        }
+
+        private void MI_ReaderConfig_Click_1(object sender, EventArgs e)
+        {
+            if (frmScanConfig == null)
+                frmScanConfig = new FormScanConfig(reader);
+            if (frmScanConfig.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                scanMsg = frmScanConfig.msg;
         }
     }
 }

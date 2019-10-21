@@ -40,21 +40,14 @@
             this.dataGridView2 = new System.Windows.Forms.DataGridView();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.btnDBDisconn = new System.Windows.Forms.Button();
-            this.btnDBConn = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
             this.btnArmUp = new System.Windows.Forms.Button();
             this.btnArmDown = new System.Windows.Forms.Button();
             this.btnArmStop = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.openDB = new System.Windows.Forms.Button();
-            this.storageDBDisConnect = new System.Windows.Forms.Button();
-            this.storageDBConnect = new System.Windows.Forms.Button();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.c = new System.Windows.Forms.Button();
-            this.openStorageDB = new System.Windows.Forms.Button();
             this.DBclear = new System.Windows.Forms.Button();
+            this.MI_ReaderConfig = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
@@ -161,7 +154,7 @@
             // 
             this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnExit.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExit.Location = new System.Drawing.Point(2, 574);
+            this.btnExit.Location = new System.Drawing.Point(2, 430);
             this.btnExit.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(87, 29);
@@ -205,36 +198,11 @@
             this.label2.Size = new System.Drawing.Size(0, 15);
             this.label2.TabIndex = 26;
             // 
-            // btnDBDisconn
-            // 
-            this.btnDBDisconn.Enabled = false;
-            this.btnDBDisconn.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDBDisconn.Location = new System.Drawing.Point(3, 198);
-            this.btnDBDisconn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnDBDisconn.Name = "btnDBDisconn";
-            this.btnDBDisconn.Size = new System.Drawing.Size(87, 29);
-            this.btnDBDisconn.TabIndex = 27;
-            this.btnDBDisconn.Text = "Disconnect";
-            this.btnDBDisconn.UseVisualStyleBackColor = true;
-            this.btnDBDisconn.Click += new System.EventHandler(this.btnDBDisconn_Click);
-            // 
-            // btnDBConn
-            // 
-            this.btnDBConn.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDBConn.Location = new System.Drawing.Point(3, 161);
-            this.btnDBConn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnDBConn.Name = "btnDBConn";
-            this.btnDBConn.Size = new System.Drawing.Size(87, 29);
-            this.btnDBConn.TabIndex = 28;
-            this.btnDBConn.Text = "Connect";
-            this.btnDBConn.UseVisualStyleBackColor = true;
-            this.btnDBConn.Click += new System.EventHandler(this.btnDBConn_Click);
-            // 
             // label3
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(0, 416);
+            this.label3.Location = new System.Drawing.Point(0, 272);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(29, 15);
             this.label3.TabIndex = 29;
@@ -243,7 +211,7 @@
             // btnArmUp
             // 
             this.btnArmUp.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnArmUp.Location = new System.Drawing.Point(3, 435);
+            this.btnArmUp.Location = new System.Drawing.Point(3, 291);
             this.btnArmUp.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnArmUp.Name = "btnArmUp";
             this.btnArmUp.Size = new System.Drawing.Size(87, 26);
@@ -255,7 +223,7 @@
             // btnArmDown
             // 
             this.btnArmDown.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnArmDown.Location = new System.Drawing.Point(3, 469);
+            this.btnArmDown.Location = new System.Drawing.Point(3, 325);
             this.btnArmDown.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnArmDown.Name = "btnArmDown";
             this.btnArmDown.Size = new System.Drawing.Size(87, 26);
@@ -267,7 +235,7 @@
             // btnArmStop
             // 
             this.btnArmStop.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnArmStop.Location = new System.Drawing.Point(3, 502);
+            this.btnArmStop.Location = new System.Drawing.Point(3, 358);
             this.btnArmStop.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnArmStop.Name = "btnArmStop";
             this.btnArmStop.Size = new System.Drawing.Size(87, 26);
@@ -279,7 +247,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(3, 536);
+            this.button1.Location = new System.Drawing.Point(3, 392);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(87, 29);
@@ -287,63 +255,6 @@
             this.button1.Text = "Stop";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // openDB
-            // 
-            this.openDB.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.openDB.Location = new System.Drawing.Point(2, 234);
-            this.openDB.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.openDB.Name = "openDB";
-            this.openDB.Size = new System.Drawing.Size(87, 29);
-            this.openDB.TabIndex = 34;
-            this.openDB.Text = "View";
-            this.openDB.UseVisualStyleBackColor = true;
-            this.openDB.Click += new System.EventHandler(this.Button2_Click);
-            // 
-            // storageDBDisConnect
-            // 
-            this.storageDBDisConnect.Enabled = false;
-            this.storageDBDisConnect.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.storageDBDisConnect.Location = new System.Drawing.Point(3, 329);
-            this.storageDBDisConnect.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.storageDBDisConnect.Name = "storageDBDisConnect";
-            this.storageDBDisConnect.Size = new System.Drawing.Size(87, 29);
-            this.storageDBDisConnect.TabIndex = 36;
-            this.storageDBDisConnect.Text = "Disconnect";
-            this.storageDBDisConnect.UseVisualStyleBackColor = true;
-            this.storageDBDisConnect.Click += new System.EventHandler(this.StorageDBDisConnect_Click);
-            // 
-            // storageDBConnect
-            // 
-            this.storageDBConnect.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.storageDBConnect.Location = new System.Drawing.Point(3, 292);
-            this.storageDBConnect.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.storageDBConnect.Name = "storageDBConnect";
-            this.storageDBConnect.Size = new System.Drawing.Size(87, 29);
-            this.storageDBConnect.TabIndex = 37;
-            this.storageDBConnect.Text = "Connect";
-            this.storageDBConnect.UseVisualStyleBackColor = true;
-            this.storageDBConnect.Click += new System.EventHandler(this.StorageDBConnect_Click);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(0, 274);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(106, 15);
-            this.label4.TabIndex = 35;
-            this.label4.Text = "Database storage";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(1, 142);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(132, 15);
-            this.label5.TabIndex = 38;
-            this.label5.Text = "From read to database";
             // 
             // c
             // 
@@ -357,18 +268,6 @@
             this.c.UseVisualStyleBackColor = true;
             this.c.Click += new System.EventHandler(this.BtnExecute_Click);
             // 
-            // openStorageDB
-            // 
-            this.openStorageDB.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.openStorageDB.Location = new System.Drawing.Point(3, 365);
-            this.openStorageDB.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.openStorageDB.Name = "openStorageDB";
-            this.openStorageDB.Size = new System.Drawing.Size(87, 29);
-            this.openStorageDB.TabIndex = 40;
-            this.openStorageDB.Text = "View";
-            this.openStorageDB.UseVisualStyleBackColor = true;
-            this.openStorageDB.Click += new System.EventHandler(this.OpenStorageDB_Click);
-            // 
             // DBclear
             // 
             this.DBclear.Location = new System.Drawing.Point(866, 34);
@@ -379,26 +278,29 @@
             this.DBclear.UseVisualStyleBackColor = true;
             this.DBclear.Click += new System.EventHandler(this.DBclear_Click);
             // 
+            // MI_ReaderConfig
+            // 
+            this.MI_ReaderConfig.Location = new System.Drawing.Point(3, 185);
+            this.MI_ReaderConfig.Name = "MI_ReaderConfig";
+            this.MI_ReaderConfig.Size = new System.Drawing.Size(75, 23);
+            this.MI_ReaderConfig.TabIndex = 42;
+            this.MI_ReaderConfig.Text = "config";
+            this.MI_ReaderConfig.UseVisualStyleBackColor = true;
+            this.MI_ReaderConfig.Click += new System.EventHandler(this.MI_ReaderConfig_Click_1);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1199, 654);
+            this.Controls.Add(this.MI_ReaderConfig);
             this.Controls.Add(this.DBclear);
-            this.Controls.Add(this.openStorageDB);
             this.Controls.Add(this.c);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.storageDBDisConnect);
-            this.Controls.Add(this.storageDBConnect);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.openDB);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.btnArmStop);
             this.Controls.Add(this.btnArmDown);
             this.Controls.Add(this.btnArmUp);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.btnDBDisconn);
-            this.Controls.Add(this.btnDBConn);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dataGridView2);
@@ -439,21 +341,14 @@
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Button btnDBDisconn;
-        private System.Windows.Forms.Button btnDBConn;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btnArmUp;
         private System.Windows.Forms.Button btnArmDown;
         private System.Windows.Forms.Button btnArmStop;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button openDB;
-        private System.Windows.Forms.Button storageDBDisConnect;
-        private System.Windows.Forms.Button storageDBConnect;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button c;
-        private System.Windows.Forms.Button openStorageDB;
         private System.Windows.Forms.Button DBclear;
+        private System.Windows.Forms.Button MI_ReaderConfig;
     }
 }
 
