@@ -866,13 +866,12 @@ namespace SingleReaderTest
             //this.timer.Enabled = false;
             if (timeCount < 3)
             {
-                //MessageBox.Show("Report Generaged");
                 timeCount++;
-                compareBarCode();
-                compareLayerCode();
-                MessageBox.Show("Comparing...");
-                MySqlCommand delete = new MySqlCommand("truncate table layer; truncate table book; truncate table bookread;", mycon);
-                delete.ExecuteNonQuery();
+                //compareBarCode();
+                //compareLayerCode();
+                //MessageBox.Show("Comparing...");
+                //MySqlCommand delete = new MySqlCommand("truncate table layer; truncate table book; truncate table bookread;", mycon);
+                //delete.ExecuteNonQuery();
             }
             else
             {
@@ -995,8 +994,8 @@ namespace SingleReaderTest
 
         private void BtnExecute_Click(object sender, EventArgs e)
         {
-            //compareBarCode();
-            //compareLayerCode();
+            compareBarCode();
+            compareLayerCode();
             compareReport detailReportform = new compareReport();
             detailReportform.ShowDialog();
         }
