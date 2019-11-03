@@ -48,9 +48,15 @@
             this.c = new System.Windows.Forms.Button();
             this.DBclear = new System.Windows.Forms.Button();
             this.MI_ReaderConfig = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.MI_Config = new System.Windows.Forms.ToolStripMenuItem();
+            this.MI_ScanConfig = new System.Windows.Forms.ToolStripMenuItem();
+            this.BTN_compare = new System.Windows.Forms.Button();
+            this.label4 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnConn
@@ -82,7 +88,7 @@
             // 
             this.btnScan.Enabled = false;
             this.btnScan.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnScan.Location = new System.Drawing.Point(176, 34);
+            this.btnScan.Location = new System.Drawing.Point(178, 34);
             this.btnScan.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnScan.Name = "btnScan";
             this.btnScan.Size = new System.Drawing.Size(87, 29);
@@ -154,7 +160,7 @@
             // 
             this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnExit.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExit.Location = new System.Drawing.Point(2, 430);
+            this.btnExit.Location = new System.Drawing.Point(2, 555);
             this.btnExit.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(87, 29);
@@ -202,7 +208,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(0, 272);
+            this.label3.Location = new System.Drawing.Point(0, 397);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(29, 15);
             this.label3.TabIndex = 29;
@@ -211,7 +217,7 @@
             // btnArmUp
             // 
             this.btnArmUp.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnArmUp.Location = new System.Drawing.Point(3, 291);
+            this.btnArmUp.Location = new System.Drawing.Point(3, 416);
             this.btnArmUp.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnArmUp.Name = "btnArmUp";
             this.btnArmUp.Size = new System.Drawing.Size(87, 26);
@@ -223,7 +229,7 @@
             // btnArmDown
             // 
             this.btnArmDown.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnArmDown.Location = new System.Drawing.Point(3, 325);
+            this.btnArmDown.Location = new System.Drawing.Point(3, 450);
             this.btnArmDown.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnArmDown.Name = "btnArmDown";
             this.btnArmDown.Size = new System.Drawing.Size(87, 26);
@@ -235,7 +241,7 @@
             // btnArmStop
             // 
             this.btnArmStop.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnArmStop.Location = new System.Drawing.Point(3, 358);
+            this.btnArmStop.Location = new System.Drawing.Point(3, 483);
             this.btnArmStop.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnArmStop.Name = "btnArmStop";
             this.btnArmStop.Size = new System.Drawing.Size(87, 26);
@@ -247,7 +253,7 @@
             // button1
             // 
             this.button1.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(3, 392);
+            this.button1.Location = new System.Drawing.Point(3, 517);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(87, 29);
@@ -259,7 +265,7 @@
             // c
             // 
             this.c.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.c.Location = new System.Drawing.Point(460, 34);
+            this.c.Location = new System.Drawing.Point(3, 244);
             this.c.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.c.Name = "c";
             this.c.Size = new System.Drawing.Size(87, 29);
@@ -280,7 +286,7 @@
             // 
             // MI_ReaderConfig
             // 
-            this.MI_ReaderConfig.Location = new System.Drawing.Point(3, 185);
+            this.MI_ReaderConfig.Location = new System.Drawing.Point(0, 2);
             this.MI_ReaderConfig.Name = "MI_ReaderConfig";
             this.MI_ReaderConfig.Size = new System.Drawing.Size(75, 23);
             this.MI_ReaderConfig.TabIndex = 42;
@@ -288,11 +294,62 @@
             this.MI_ReaderConfig.UseVisualStyleBackColor = true;
             this.MI_ReaderConfig.Click += new System.EventHandler(this.MI_ReaderConfig_Click_1);
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MI_Config});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1199, 25);
+            this.menuStrip1.TabIndex = 43;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // MI_Config
+            // 
+            this.MI_Config.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MI_ScanConfig});
+            this.MI_Config.Name = "MI_Config";
+            this.MI_Config.Size = new System.Drawing.Size(58, 21);
+            this.MI_Config.Text = "Config";
+            // 
+            // MI_ScanConfig
+            // 
+            this.MI_ScanConfig.Enabled = false;
+            this.MI_ScanConfig.Name = "MI_ScanConfig";
+            this.MI_ScanConfig.Size = new System.Drawing.Size(180, 22);
+            this.MI_ScanConfig.Text = "Scan config";
+            this.MI_ScanConfig.Click += new System.EventHandler(this.MI_ScanConfig_Click_1);
+            // 
+            // BTN_compare
+            // 
+            this.BTN_compare.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.BTN_compare.Location = new System.Drawing.Point(3, 207);
+            this.BTN_compare.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.BTN_compare.Name = "BTN_compare";
+            this.BTN_compare.Size = new System.Drawing.Size(87, 29);
+            this.BTN_compare.TabIndex = 44;
+            this.BTN_compare.Text = "Compare";
+            this.BTN_compare.UseVisualStyleBackColor = true;
+            this.BTN_compare.Click += new System.EventHandler(this.BTN_compare_Click);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Arial", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(0, 188);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(123, 15);
+            this.label4.TabIndex = 45;
+            this.label4.Text = "Compare and Report";
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1199, 654);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.BTN_compare);
+            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.MI_ReaderConfig);
             this.Controls.Add(this.DBclear);
             this.Controls.Add(this.c);
@@ -322,6 +379,8 @@
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -349,6 +408,11 @@
         private System.Windows.Forms.Button c;
         private System.Windows.Forms.Button DBclear;
         private System.Windows.Forms.Button MI_ReaderConfig;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem MI_Config;
+        private System.Windows.Forms.ToolStripMenuItem MI_ScanConfig;
+        private System.Windows.Forms.Button BTN_compare;
+        private System.Windows.Forms.Label label4;
     }
 }
 

@@ -41,7 +41,15 @@ namespace SingleReaderTest
 
         public FormMain()
         {
-            mycon.Open();
+            try
+            {
+                mycon.Open();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("You should link to the database.");
+            }
+            
             InitializeComponent();
 
             //traversing all possible serial ports, use the first one
@@ -390,7 +398,7 @@ namespace SingleReaderTest
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    //MessageBox.Show(ex.Message);
                     flag = true;
                 }
             }
@@ -798,8 +806,8 @@ namespace SingleReaderTest
                     btnScan.Enabled = true;
                     btnStop.Enabled = false;
                     DBclear.Enabled = true;
-                    //MI_ScanConfig.Enabled = true;
-                    //MI_ReaderConfig.Enabled = true;
+                    MI_ScanConfig.Enabled = true;
+                    MI_ReaderConfig.Enabled = true;
                     //MI_GPIO.Enabled = true;
                     break;
                 case "disconn":
@@ -807,8 +815,8 @@ namespace SingleReaderTest
                     btnDisconn.Enabled = false;
                     btnScan.Enabled = false;
                     btnStop.Enabled = false;
-                    //MI_ScanConfig.Enabled = false;
-                    //MI_ReaderConfig.Enabled = false;
+                    MI_ScanConfig.Enabled = false;
+                    MI_ReaderConfig.Enabled = false;
                     //MI_GPIO.Enabled = false;
                     break;
                 case "scan":
@@ -817,8 +825,8 @@ namespace SingleReaderTest
                     btnScan.Enabled = false;
                     btnStop.Enabled = true;
                     DBclear.Enabled = false;
-                    //MI_ScanConfig.Enabled = false;
-                    //MI_ReaderConfig.Enabled = false;
+                    MI_ScanConfig.Enabled = false;
+                    MI_ReaderConfig.Enabled = false;
                     //MI_GPIO.Enabled = false;
                     break;
             }
@@ -909,27 +917,6 @@ namespace SingleReaderTest
             }
         }
 
-        FormScanConfig frmScanConfig = null;
-        // 扫描配置
-        private void MI_ScanConfig_Click(object sender, EventArgs e)
-        {
-            if (frmScanConfig == null)
-                frmScanConfig = new FormScanConfig(reader);
-            if (frmScanConfig.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                scanMsg = frmScanConfig.msg;
-        }
-
-        // 读写器配置
-        private void MI_ReaderConfig_Click(object sender, EventArgs e)
-        {
-            FormReaderConfig frm = new FormReaderConfig(reader);
-            frm.isTryReconnNet = this.isTryReconnNet;
-            frm.ShowDialog();
-            this.isTryReconnNet = frm.isTryReconnNet;
-            this.tryReconnNetTimeSpan = frm.tryReconnNetTimeSpan;
-            frm.Dispose();
-        }
-
         // GPIO
         private void MI_GPIO_Click(object sender, EventArgs e)
         {
@@ -943,16 +930,6 @@ namespace SingleReaderTest
             FormHelp frm = new FormHelp();
             frm.ShowDialog();
             frm.Dispose();
-        }
-
-        private void MI_Config_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MI_DBConfig_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void btnArmStop_Click(object sender, EventArgs e)//r
@@ -994,8 +971,6 @@ namespace SingleReaderTest
 
         private void BtnExecute_Click(object sender, EventArgs e)
         {
-            compareBarCode();
-            compareLayerCode();
             compareReport detailReportform = new compareReport();
             detailReportform.ShowDialog();
         }
@@ -1018,13 +993,32 @@ namespace SingleReaderTest
             }
 
         }
-
+        
         private void MI_ReaderConfig_Click_1(object sender, EventArgs e)
         {
             if (frmScanConfig == null)
                 frmScanConfig = new FormScanConfig(reader);
             if (frmScanConfig.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 scanMsg = frmScanConfig.msg;
+        }
+        FormScanConfig frmScanConfig = null;
+        private void MI_ScanConfig_Click_1(object sender, EventArgs e)
+        {
+            if (frmScanConfig == null)
+                frmScanConfig = new FormScanConfig(reader);
+            if (frmScanConfig.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+                scanMsg = frmScanConfig.msg;
+        }
+
+        private void ToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void BTN_compare_Click(object sender, EventArgs e)
+        {
+            compareBarCode();
+            compareLayerCode();
         }
     }
 }
